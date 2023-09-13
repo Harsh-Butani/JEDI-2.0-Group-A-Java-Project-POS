@@ -1,6 +1,6 @@
 package com.flipkart.bean;
 
-public class GymOwnerDB {
+public class GymOwnerDetails {
 	private String gymOwnerID;
 	public String getGymOwnerID() {
 		return gymOwnerID;

@@ -1,6 +1,6 @@
 package com.flipkart.bean;
 
-public class SlotCatalogDB {
+public class SlotCatalogDetails {
 	private String gymID;
 	public String getGymID() {
 		return gymID;

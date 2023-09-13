@@ -1,6 +1,6 @@
 package com.flipkart.bean;
 
-public class BookingListDB {
+public class BookingList {
 	private String customerID;
 	public String getCustomerID() {
 		return customerID;

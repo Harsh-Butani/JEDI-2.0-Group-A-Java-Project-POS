@@ -1,6 +1,6 @@
 package com.flipkart.bean;
 
-public class CredentialsDB {
+public class User {
 	private String emailID;
 	public String getEmailID() {
 		return emailID;
