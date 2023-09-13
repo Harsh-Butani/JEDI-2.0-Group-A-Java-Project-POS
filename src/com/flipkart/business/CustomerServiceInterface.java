@@ -8,11 +8,16 @@ package com.flipkart.business;
  */
 public interface CustomerServiceInterface {
 	public void viewGyms();
+	
 	public boolean bookSlot();
 	
 	public boolean cancelBookedSlots();
 	
 	public String viewAllBookings();
 
-
+	public void getGymInfo();
+	
+	public void checkBookingList();
+	
+	public void checkAvailableSlots();
 }

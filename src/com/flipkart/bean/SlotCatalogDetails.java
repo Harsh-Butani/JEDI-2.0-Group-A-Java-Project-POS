@@ -2,6 +2,10 @@ package com.flipkart.bean;
 
 public class SlotCatalogDetails {
 	private String gymID;
+	private int slotNumber;
+	private int availableSeats;
+	private boolean availableStatus;
+	
 	public String getGymID() {
 		return gymID;
 	}
@@ -26,7 +30,4 @@ public class SlotCatalogDetails {
 	public void setAvailableStatus(boolean availableStatus) {
 		this.availableStatus = availableStatus;
 	}
-	private int slotNumber;
-	private int availableSeats;
-	private boolean availableStatus;
 }

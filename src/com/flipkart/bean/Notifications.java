@@ -8,6 +8,7 @@ package com.flipkart.bean;
  */
 public class Notifications {
 	private String notificationId;
+	
 	public String getNotificationId() {
 		return notificationId;
 	}

@@ -2,6 +2,10 @@ package com.flipkart.bean;
 
 public class GymOwner {
 	private String name;
+	private String address;
+	private int IDProof;
+	private String gymOwnerID;
+	
 	public String getName() {
 		return name;
 	}
@@ -26,7 +30,4 @@ public class GymOwner {
 	public void setGymOwnerID(String gymOwnerID) {
 		this.gymOwnerID = gymOwnerID;
 	}
-	private String address;
-	private int IDProof;
-	private String gymOwnerID;
 }

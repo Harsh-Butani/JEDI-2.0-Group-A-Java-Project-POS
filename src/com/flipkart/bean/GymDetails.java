@@ -2,6 +2,10 @@ package com.flipkart.bean;
 
 public class GymDetails {
 	private String gymID;
+	private boolean gymApprovalStatus;
+	private String gymName;
+	private String gymAddress;
+	
 	public String getGymID() {
 		return gymID;
 	}
@@ -26,7 +30,4 @@ public class GymDetails {
 	public void setGymAddress(String gymAddress) {
 		this.gymAddress = gymAddress;
 	}
-	private boolean gymApprovalStatus;
-	private String gymName;
-	private String gymAddress;
 }
