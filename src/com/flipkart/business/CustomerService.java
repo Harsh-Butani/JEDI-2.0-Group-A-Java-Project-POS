@@ -8,4 +8,12 @@ public class CustomerService {
 	public boolean bookSlot() {
 		
 	}
+	
+	public boolean cancelBookedSlots() {
+		
+	}
+	
+	public String viewAllBookings() {
+		
+	}
 }
