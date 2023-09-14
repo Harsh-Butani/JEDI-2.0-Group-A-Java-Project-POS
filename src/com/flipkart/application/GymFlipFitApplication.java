@@ -11,7 +11,7 @@ public class GymFlipFitApplication {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated
-        System.out.println("Welcome to Flipfit Application for Slot Booking!");
+        System.out.println("Welcome to FlipFit Application for Slot Booking!");
         Scanner in = new Scanner(System.in);
         while(true) {
         	System.out.println("----Menu----");
@@ -53,22 +53,13 @@ public class GymFlipFitApplication {
         			emailID = in.next();
         			System.out.println("Create a password");
         			password = in.next();
-//        			System.out.println("Enter your role (Customer/GymOwner/Admin)");
-//        			role = in.next();
+        			System.out.println("Enter your role (Customer/GymOwner/Admin)");
+        			role = in.next();
         			System.out.println("Enter name");
         			String name = in.next();
         			System.out.println("Enter address");
         			String address = in.next();
         			System.out.println("Registration complete");
-//        			if(role.equals("Customer")) {
-//        				GymFlipFitCustomerMenu.customerMenu(in);
-//        			}
-//        			else if(role.equals("GymOwner")) {
-//        				GymFlipFitGymOwnerMenu.gymOwnerMenu(in);
-//        			}
-//        			else {
-//        				GymFlipFitAdminMenu.adminMenu(in);
-//        			}
         			break;
         		case 3:
         			System.out.println("Enter current password");
@@ -79,11 +70,10 @@ public class GymFlipFitApplication {
         			break;
         		case 4:
         			in.close();
-        			// return;
         			flag = true;
         			break;
         		default:
-        			System.out.println("Enter a valid option");
+        			System.out.println("Please enter a valid option.");
         			break;
         	}
         	if(flag) {
