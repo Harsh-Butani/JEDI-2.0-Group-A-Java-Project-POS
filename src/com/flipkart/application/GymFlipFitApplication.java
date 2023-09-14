@@ -19,7 +19,7 @@ public class GymFlipFitApplication {
         	System.out.println("Press 4 to Exit");
         	
         	int option = in.nextInt();
-        	String emailID, password;
+        	String emailID, password,role;
         	boolean flag = false;
         	switch (option) {
         		case 1:
@@ -27,9 +27,20 @@ public class GymFlipFitApplication {
         			emailID = in.next();
         			System.out.println("Enter password");
         			password = in.next();
+        			System.out.println("Enter your role (Customer/GymOwner/Admin)");
+        			role = in.next();
         			VerificationServiceInterface verifier = new VerificationServiceOperation();
         			if(verifier.verifyCredentials(emailID, password)) {
         				System.out.println("Successfully logged in");
+        				if(role.equals("Customer")) {
+            				GymFlipFitCustomerMenu.customerMenu(in);
+            			}
+            			else if(role.equals("GymOwner")) {
+            				GymFlipFitGymOwnerMenu.gymOwnerMenu(in);
+            			}
+            			else {
+            				GymFlipFitAdminMenu.adminMenu(in);
+            			}
         			}
         			else {
         				System.out.println("Incorrect/Invalid credentials");
@@ -40,22 +51,22 @@ public class GymFlipFitApplication {
         			emailID = in.next();
         			System.out.println("Create a password");
         			password = in.next();
-        			System.out.println("Enter your role (Customer/GymOwner/Admin)");
-        			String role = in.next();
+//        			System.out.println("Enter your role (Customer/GymOwner/Admin)");
+//        			role = in.next();
         			System.out.println("Enter name");
         			String name = in.next();
         			System.out.println("Enter address");
         			String address = in.next();
         			System.out.println("Registration complete");
-        			if(role.equals("Customer")) {
-        				GymFlipFitCustomerMenu.customerMenu(in);
-        			}
-        			else if(role.equals("GymOwner")) {
-        				GymFlipFitGymOwnerMenu.gymOwnerMenu(in);
-        			}
-        			else {
-        				GymFlipFitAdminMenu.adminMenu(in);
-        			}
+//        			if(role.equals("Customer")) {
+//        				GymFlipFitCustomerMenu.customerMenu(in);
+//        			}
+//        			else if(role.equals("GymOwner")) {
+//        				GymFlipFitGymOwnerMenu.gymOwnerMenu(in);
+//        			}
+//        			else {
+//        				GymFlipFitAdminMenu.adminMenu(in);
+//        			}
         			break;
         		case 3:
         			System.out.println("Enter current password");
