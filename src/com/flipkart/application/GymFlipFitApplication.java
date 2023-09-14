@@ -1,16 +1,20 @@
 package com.flipkart.application;
+import java.util.ArrayList;
+import java.util.List;
 /**
  * @author kshitij.gupta1
  */
 import java.util.Scanner;
 
 import com.flipkart.business.VerificationServiceOperation;
+import com.flipkart.bean.User;
 import com.flipkart.business.VerificationServiceInterface;
 
 public class GymFlipFitApplication {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated
+		List<User> userDetails = new ArrayList<User>();
         System.out.println("Welcome to FlipFit Application for Slot Booking!");
         Scanner in = new Scanner(System.in);
         while(true) {
@@ -25,19 +29,20 @@ public class GymFlipFitApplication {
         	boolean flag = false;
         	switch (option) {
         		case 1:
+        			User userLogin = new User();
         			System.out.println("Enter emailID");
-        			emailID = in.next();
+        			userLogin.setEmailID(in.next());
         			System.out.println("Enter password");
-        			password = in.next();
+        			userLogin.setPassword(in.next());
         			System.out.println("Enter your role (Customer/GymOwner/Admin)");
-        			role = in.next();
+        			userLogin.setRole(in.next());
         			VerificationServiceInterface verifier = new VerificationServiceOperation();
-        			if(verifier.verifyCredentials(emailID, password)) {
+        			if(verifier.verifyCredentials(userLogin, userDetails)) {
         				System.out.println("Successfully logged in");
-        				if(role.equals("Customer")) {
+        				if(userLogin.getRole().equals("Customer")) {
             				GymFlipFitCustomerMenu.customerMenu(in);
             			}
-            			else if(role.equals("GymOwner")) {
+            			else if(userLogin.getRole().equals("GymOwner")) {
             				GymFlipFitGymOwnerMenu.gymOwnerMenu(in);
             			}
             			else {
@@ -49,16 +54,16 @@ public class GymFlipFitApplication {
         			}
         			break;
         		case 2:
+        			User user  = new User();
         			System.out.println("Enter email ID");
-        			emailID = in.next();
+        			user.setEmailID(in.next());
+        			
         			System.out.println("Create a password");
-        			password = in.next();
+        			user.setPassword(in.next());
         			System.out.println("Enter your role (Customer/GymOwner/Admin)");
-        			role = in.next();
-        			System.out.println("Enter name");
-        			String name = in.next();
-        			System.out.println("Enter address");
-        			String address = in.next();
+        			user.setRole(in.next());
+        			user.setID(Integer.toString(userDetails.size()+1));
+        			userDetails.add(user);
         			System.out.println("Registration complete");
         			break;
         		case 3:
