@@ -1,5 +1,7 @@
 package com.flipkart.bean;
-
+/**
+ * @author kshitij.gupta1
+ */
 public class BookingList {
 	private String customerID;
 	private String gymID;

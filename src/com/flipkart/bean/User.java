@@ -1,5 +1,7 @@
 package com.flipkart.bean;
-
+/**
+ * @author kshitij.gupta1
+ */
 public class User {
 	private String emailID;
 	private String password;

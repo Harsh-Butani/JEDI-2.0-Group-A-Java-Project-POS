@@ -4,7 +4,7 @@
 package com.flipkart.bean;
 
 /**
- * 
+ * @author kshitij.gupta1
  */
 public class Notifications {
 	private String notificationId;

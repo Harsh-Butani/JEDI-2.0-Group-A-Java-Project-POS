@@ -1,5 +1,7 @@
 package com.flipkart.bean;
-
+/**
+ * @author kshitij.gupta1
+ */
 public class GymOwner {
 	private String name;
 	private String address;

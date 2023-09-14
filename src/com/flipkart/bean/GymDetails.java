@@ -1,5 +1,7 @@
 package com.flipkart.bean;
-
+/**
+ * @author kshitij.gupta1
+ */
 public class GymDetails {
 	private String gymID;
 	private boolean gymApprovalStatus;

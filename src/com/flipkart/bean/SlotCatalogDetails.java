@@ -1,5 +1,7 @@
 package com.flipkart.bean;
-
+/**
+ * @author kshitij.gupta1
+ */
 public class SlotCatalogDetails {
 	private String gymID;
 	private int slotNumber;
