@@ -29,9 +29,9 @@ public class GymFlipFitCustomerMenu {
 //		cs.checkAvailableSlots("101");
 		
 		CustomerServiceInterface customer = new CustomerServiceOperation();
-		CustomerServiceOperation.init();
+		//CustomerServiceOperation.init();
 		System.out.println("Enter User ID: ");
-		String UserID = in.next();
+		Integer UserID = in.nextInt();
 		
 		while(true) {
 			System.out.println("----Customer Menu----");
@@ -51,14 +51,14 @@ public class GymFlipFitCustomerMenu {
 					break;
 				case 2:
 					System.out.println("Enter gym ID");
-					String gymID = in.next();
+					Integer gymID = in.nextInt();
 					System.out.println("Enter slot number");
 					Integer slotnumber = in.nextInt();
 					customer.bookSlot(gymID, slotnumber, UserID);
 					break;
 				case 3:
 					System.out.println("Enter gym ID");
-					gymID = in.next();
+					gymID = in.nextInt();
 					System.out.println("Enter slot number");
 					slotnumber = in.nextInt();
 					customer.cancelBookedSlots(gymID, slotnumber, UserID);
@@ -68,16 +68,16 @@ public class GymFlipFitCustomerMenu {
 					break;
 				case 5:
 					System.out.println("Enter Gym ID: ");
-					String GymID = in.next();
-					customer.getGymInfo(GymID);
+					gymID = in.nextInt();
+					customer.getGymInfo(gymID);
 					break;
 				case 6:
 					//customer.checkBookingList();
 					break;
 				case 7:
 					System.out.println("Enter Gym ID: ");
-					GymID = in.next();
-					customer.checkAvailableSlots(GymID);
+					gymID = in.nextInt();
+					customer.checkAvailableSlots(gymID);
 					break;
 				case 8:
 					return;

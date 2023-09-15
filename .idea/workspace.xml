@@ -7,45 +7,38 @@
     <list default="true" id="68655522-442b-42bc-bb34-82d15192d3e7" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JEDI-2.0 Group-A-Java-Project-POS.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/application/GYMFlipFitApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/application/GYMFlipFitApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/application/GymFlipFitAdminMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/application/GymFlipFitAdminMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/application/GymFlipFitCustomerMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/application/GymFlipFitCustomerMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/application/GymFlipFitGymOwnerMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/application/GymFlipFitGymOwnerMenu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/bean/BookingList.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/bean/BookingList.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/bean/Customer.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/bean/Customer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/bean/GymDetails.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/bean/GymDetails.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/bean/GymOwner.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/bean/GymOwner.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/bean/GymOwnerDetails.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/bean/GymOwnerDetails.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/bean/Notifications.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/bean/Notifications.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/bean/SlotCatalogDetails.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/bean/SlotCatalogDetails.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/bean/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/bean/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/business/AdminServiceInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/business/AdminServiceInterface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/business/AdminServiceOperation.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/business/AdminServiceOperation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/business/CustomerServiceInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/business/CustomerServiceInterface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/business/CustomerServiceOperation.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/business/CustomerServiceOperation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/business/GymOwnerServiceInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/business/GymOwnerServiceInterface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/business/GymOwnerServiceOperation.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/business/GymOwnerServiceOperation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/business/GymServiceInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/business/GymServiceInterface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/business/GymServiceOperation.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/business/GymServiceOperation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/business/VerificationServiceInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/business/VerificationServiceInterface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/flipkart/business/VerificationServiceOperation.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/flipkart/business/VerificationServiceOperation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/flipkart/application/GymFlipFitApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/flipkart/application/GymFlipFitApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JEDI-2.0-Group-A-Java-Project-POS.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/flipkart/constants/SQLConstants.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/flipkart/application/GymFlipFitCustomerMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/flipkart/application/GymFlipFitCustomerMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/flipkart/business/CustomerServiceInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/flipkart/business/CustomerServiceInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/flipkart/business/CustomerServiceOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/flipkart/business/CustomerServiceOperation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/flipkart/dao/CustomerDAOImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/flipkart/dao/CustomerDAOImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/flipkart/dao/CustomerDAOInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/flipkart/dao/CustomerDAOInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/flipkart/dao/DatabaseConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/flipkart/dao/DatabaseConnector.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2VNB9LjE2NNkAepbATLnC04OPD0" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -55,14 +48,18 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "development",
-    "last_opened_file_path": "/Applications/JEDI-2.0-Group-A-Java-Project-POS"
+    "last_opened_file_path": "/Applications/JEDI-2.0-Group-A-Java-Project-POS",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
 }]]></component>
   <component name="RunManager">
     <configuration name="GymFlipFitApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.flipkart.application.GymFlipFitApplication" />
-      <module name="JEDI-2.0 Group-A-Java-Project-POS" />
+      <module name="JEDI-2.0-Group-A-Java-Project-POS" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.flipkart.application.*" />

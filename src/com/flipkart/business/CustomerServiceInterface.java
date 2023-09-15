@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.flipkart.business;
 
@@ -8,16 +8,16 @@ package com.flipkart.business;
  */
 public interface CustomerServiceInterface {
 	public void viewGyms();
-	
-	public boolean bookSlot(String gymID, Integer slotNumber, String userID);
-	
-	public boolean cancelBookedSlots(String gymID, Integer slotNumber, String userID);
-	
-	public String viewAllBookings(String userID);
 
-	public void getGymInfo(String gymID);
-	
+	public boolean bookSlot(Integer gymID, Integer slotNumber, Integer userID);
+
+	public boolean cancelBookedSlots(Integer gymID, Integer slotNumber, Integer userID);
+
+	public void viewAllBookings(Integer userID);
+
+	public void getGymInfo(Integer gymID);
+
 	// public void checkBookingList();
-	
-	public void checkAvailableSlots(String gymID);
+
+	public void checkAvailableSlots(Integer gymID);
 }
