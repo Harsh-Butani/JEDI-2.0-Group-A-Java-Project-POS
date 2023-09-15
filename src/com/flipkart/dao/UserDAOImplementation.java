@@ -20,12 +20,11 @@ public class UserDAOImplementation implements UserDAOInterface{
 	public void insertUserDB(User user) {
 		try {
 
-			String sql = "insert into User values(?,?,?,?)";
+			String sql = "insert into User (email,password,role) values(?,?,?)";
 			dbc.stmt = dbc.conn.prepareStatement(sql);
-			dbc.stmt.setInt(1, user.getUserID());
-			dbc.stmt.setString(2, user.getEmailID());
-			dbc.stmt.setString(3, user.getPassword());
-			dbc.stmt.setString(4, user.getRole());
+			dbc.stmt.setString(1, user.getEmailID());
+			dbc.stmt.setString(2, user.getPassword());
+			dbc.stmt.setString(3, user.getRole());
 			dbc.stmt.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e);
@@ -65,7 +64,7 @@ public class UserDAOImplementation implements UserDAOInterface{
 		         String password = rs.getString("password");
 		         String role = rs.getString("role");
 		         if(email.equals(user.getEmailID()) && password.equals(user.getPassword()) && role.equals(user.getRole())){
-		        	 currUser = new User(false);
+		        	 currUser = new User();
 			         currUser.setEmailID(email);
 			         currUser.setPassword(password);
 			         currUser.setRole(role);

@@ -37,7 +37,7 @@ public class GymFlipFitApplication {
 			UserServiceInterface userService = new UserServiceOperation();
         	switch (option) {
         		case 1:
-        			User userLogin = new User(false);
+        			User userLogin = new User();
         			System.out.println("Enter emailID");
         			userLogin.setEmailID(in.next());
         			System.out.println("Enter password");
@@ -62,7 +62,7 @@ public class GymFlipFitApplication {
         			}
         			break;
         		case 2:
-        			User user  = new User(true);
+        			User user  = new User();
         			System.out.println("Enter email ID");
         			user.setEmailID(in.next());
         			System.out.println("Create a password");
@@ -73,7 +73,7 @@ public class GymFlipFitApplication {
         			System.out.println("Registration complete");
         			break;
         		case 3:
-        			user = new User(false);
+        			user = new User();
         			System.out.println("Enter emailID");
         			user.setEmailID(in.next());
         			System.out.println("Enter current password");
