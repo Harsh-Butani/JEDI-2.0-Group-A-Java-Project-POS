@@ -60,34 +60,25 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 	public User getUser(User user) {
 		// TODO Auto-generated method stub
 		try {
-			String sql = "SELECT * FROM User WHERE email = ?";
+			String sql = "SELECT * FROM User";
 			dbc.stmt = dbc.conn.prepareStatement(sql);
-			String emailID = user.getEmailID();
-			dbc.stmt.setString(1, emailID);
-//			dbc.stmt.setString(2, user.getPassword());
-//			dbc.stmt.setString(3, user.getRole());
 		     ResultSet rs = dbc.stmt.executeQuery(sql);
 		     User currUser = null;
 		      //STEP 5: Extract data from result set
-		      if(rs.next()){
+		      while(rs.next()){
 		         //Retrieve by column name
 		         String email = rs.getString("email");
 		         String password = rs.getString("password");
 		         String role = rs.getString("role");
-
-		         //Display values
-		         System.out.println("email: " + email);
-		         System.out.println("password: " + password);
-		         System.out.println("role: " + role);
-		         
-		         currUser = new User(false);
-		         currUser.setEmailID(email);
-		         currUser.setPassword(password);
-		         currUser.setRole(role);
+		         if(email.equals(user.getEmailID()) && password.equals(user.getPassword()) && role.equals(user.getRole()){
+		        	 currUser = new User(false);
+			         currUser.setEmailID(email);
+			         currUser.setPassword(password);
+			         currUser.setRole(role);
+		         }
 		      }
 		      return currUser;
 		} catch (Exception e) {
-			System.out.println("exception here");
 			System.out.println(e);
 			return null;
 		}

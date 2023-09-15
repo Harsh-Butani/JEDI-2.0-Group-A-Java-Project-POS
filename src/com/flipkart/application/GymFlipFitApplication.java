@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import com.flipkart.business.VerificationServiceOperation;
 import com.flipkart.dao.CustomerDAOImplementation;
+import com.flipkart.dao.UserDAOImplementation;
 import com.flipkart.bean.User;
 import com.flipkart.business.VerificationServiceInterface;
 import com.flipkart.business.CustomerServiceOperation;
@@ -29,8 +30,7 @@ public class GymFlipFitApplication {
         	int option = in.nextInt();
         	String emailID, password,role;
         	boolean flag = false;
-        	CustomerDAOImplementation dao = new CustomerDAOImplementation();
-			dao.init();
+        	
 			VerificationServiceInterface verifier = new VerificationServiceOperation();
         	switch (option) {
         		case 1:
@@ -81,7 +81,7 @@ public class GymFlipFitApplication {
         			if(verifier.verifyCredentials(user)) {
         				System.out.println("Enter your new password:");
         				String newPassword = in.next();
-        				dao.updateUserDB(user,newPassword);
+        				userDAO.updateUserDB(user,newPassword);
         			}else {
         				System.out.println("Please enter correct password.");
         			}

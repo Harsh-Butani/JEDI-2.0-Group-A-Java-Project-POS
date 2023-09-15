@@ -11,7 +11,6 @@ public class VerificationServiceOperation implements VerificationServiceInterfac
 	public VerificationServiceOperation(){
 		dao = new CustomerDAOImplementation();
 		dao.init();
-		System.out.println("dao created in verification");
 	}
 	@Override
 	public boolean verifyCredentials(User user) {
