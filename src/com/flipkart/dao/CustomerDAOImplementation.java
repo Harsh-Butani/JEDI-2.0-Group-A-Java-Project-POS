@@ -21,7 +21,6 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 
 	public void init() {
 		dbc = new DatabaseConnector();
-		dbc.init();
 	}
 
 	@Override

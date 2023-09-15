@@ -2,19 +2,20 @@ package com.flipkart.business;
 
 import com.flipkart.bean.User;
 import com.flipkart.dao.CustomerDAOImplementation;
+import com.flipkart.dao.UserDAOImplementation;
+import com.flipkart.dao.UserDAOInterface;
 
 /**
  * @author kshitij.gupta1
  */
 public class VerificationServiceOperation implements VerificationServiceInterface{
-	CustomerDAOImplementation dao;
+	UserDAOInterface userDAO = new UserDAOImplementation();
 	public VerificationServiceOperation(){
-		dao = new CustomerDAOImplementation();
-		dao.init();
+		userDAO = new UserDAOImplementation();
 	}
 	@Override
 	public boolean verifyCredentials(User user) {
-		User isRegisteredUser = dao.getUser(user);
+		User isRegisteredUser = userDAO.getUserDB(user);
 		if(isRegisteredUser!=null) {
 			return true;
 		}

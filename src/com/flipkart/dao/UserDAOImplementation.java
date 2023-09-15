@@ -12,9 +12,8 @@ import com.flipkart.bean.User;
  */
 public class UserDAOImplementation implements UserDAOInterface{
 	DatabaseConnector dbc;
-	public void init() {
+	public UserDAOImplementation() {
 		dbc = new DatabaseConnector();
-		dbc.init();
 	}
 
 	@Override
@@ -34,6 +33,7 @@ public class UserDAOImplementation implements UserDAOInterface{
 		
 	}
 	
+	@Override
 	public void updateUserDB(User user, String password) {
 		// TODO Auto-generated method stub
 		try {
@@ -50,7 +50,8 @@ public class UserDAOImplementation implements UserDAOInterface{
 		}
 	}
 	
-	public User getUser(User user) {
+	@Override
+	public User getUserDB(User user) {
 		// TODO Auto-generated method stub
 		try {
 			String sql = "SELECT * FROM User";
@@ -63,7 +64,7 @@ public class UserDAOImplementation implements UserDAOInterface{
 		         String email = rs.getString("email");
 		         String password = rs.getString("password");
 		         String role = rs.getString("role");
-		         if(email.equals(user.getEmailID()) && password.equals(user.getPassword()) && role.equals(user.getRole()){
+		         if(email.equals(user.getEmailID()) && password.equals(user.getPassword()) && role.equals(user.getRole())){
 		        	 currUser = new User(false);
 			         currUser.setEmailID(email);
 			         currUser.setPassword(password);

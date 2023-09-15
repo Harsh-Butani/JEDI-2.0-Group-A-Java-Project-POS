@@ -12,6 +12,8 @@ import com.flipkart.dao.UserDAOImplementation;
 import com.flipkart.bean.User;
 import com.flipkart.business.VerificationServiceInterface;
 import com.flipkart.business.CustomerServiceOperation;
+import com.flipkart.business.UserServiceInterface;
+import com.flipkart.business.UserServiceOperation;
 
 public class GymFlipFitApplication {
 
@@ -32,6 +34,7 @@ public class GymFlipFitApplication {
         	boolean flag = false;
         	
 			VerificationServiceInterface verifier = new VerificationServiceOperation();
+			UserServiceInterface userService = new UserServiceOperation();
         	switch (option) {
         		case 1:
         			User userLogin = new User(false);
@@ -66,8 +69,7 @@ public class GymFlipFitApplication {
         			user.setPassword(in.next());
         			System.out.println("Enter your role (Customer/GymOwner/Admin)");
         			user.setRole(in.next());
-        			
-        			dao.insertUserDB(user);
+        			userService.registerUser(user);
         			System.out.println("Registration complete");
         			break;
         		case 3:
@@ -81,7 +83,7 @@ public class GymFlipFitApplication {
         			if(verifier.verifyCredentials(user)) {
         				System.out.println("Enter your new password:");
         				String newPassword = in.next();
-        				userDAO.updateUserDB(user,newPassword);
+        				userService.updateUser(user,newPassword);
         			}else {
         				System.out.println("Please enter correct password.");
         			}
