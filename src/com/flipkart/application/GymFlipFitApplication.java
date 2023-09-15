@@ -82,6 +82,8 @@ public class GymFlipFitApplication {
         				System.out.println("Enter your new password:");
         				String newPassword = in.next();
         				dao.updateUserDB(user,newPassword);
+        			}else {
+        				System.out.println("Please enter correct password.");
         			}
         			break;
         		case 4:

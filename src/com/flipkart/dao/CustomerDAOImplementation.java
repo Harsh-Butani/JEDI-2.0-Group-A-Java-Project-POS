@@ -45,7 +45,7 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 		// TODO Auto-generated method stub
 		try {
 
-			String sql = "update User set password=? where email=? and password=? and role=?";
+			String sql = "update User set password=(?) where email=(?) and password=(?) and role=(?)";
 			dbc.stmt = dbc.conn.prepareStatement(sql);
 			dbc.stmt.setString(1, password);
 			dbc.stmt.setString(2, user.getEmailID());
@@ -60,11 +60,12 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 	public User getUser(User user) {
 		// TODO Auto-generated method stub
 		try {
-
-			String sql = "SELECT email, password, role FROM user where email=? and password=? and role=?";
-			dbc.stmt.setString(1, user.getEmailID());
-			dbc.stmt.setString(2, user.getPassword());
-			dbc.stmt.setString(3, user.getRole());
+			String sql = "SELECT * FROM User WHERE email = ?";
+			dbc.stmt = dbc.conn.prepareStatement(sql);
+			String emailID = user.getEmailID();
+			dbc.stmt.setString(1, emailID);
+//			dbc.stmt.setString(2, user.getPassword());
+//			dbc.stmt.setString(3, user.getRole());
 		     ResultSet rs = dbc.stmt.executeQuery(sql);
 		     User currUser = null;
 		      //STEP 5: Extract data from result set
@@ -86,6 +87,7 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 		      }
 		      return currUser;
 		} catch (Exception e) {
+			System.out.println("exception here");
 			System.out.println(e);
 			return null;
 		}
