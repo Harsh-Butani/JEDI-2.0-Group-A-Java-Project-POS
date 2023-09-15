@@ -22,33 +22,8 @@ public class CustomerServiceOperation implements CustomerServiceInterface{
 	public static HashMap<String, String> gymInfo = new HashMap();
 	
 	public static void init() {
-		// gym 1
-//		slotMap1.put(0,30);
-//		slotMap1.put(1, 30);
-//		slotMap1.put(2, 30);
-//		slotMap1.put(9, 30);
-//		slotMap1.put(10, 30);
-//		slotMap1.put(11, 30);
-//		gymMap.put("101",slotMap1);
-////		slotMap2.put(0,30);
-////		slotMap2.put(1, 30);
-////		slotMap2.put(2, 30);
-////		slotMap2.put(9, 30);
-////		slotMap2.put(10, 30);
-////		slotMap2.put(11, 30);
-//		//innerMap.put(0, "101");
-//		innerMap.put(1, "102");
-//		innerMap.put(2, "103");
-//		userMap.put("197982", innerMap);
-//		gymInfo.put("101", "Gym with ID 101");
-//		gymInfo.put("102", "Gym with ID 102");
-		CustomerDAOImplementation cdao = new CustomerDAOImplementation();
-		cdao.init();
 		CustomerDAOInterface dao = new CustomerDAOImplementation();
-		User u = new User();
-		u.setEmailID("abc.com");
-		u.setPassword("password");
-		dao.insertUserDB(u);
+		dao.init();
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.flipkart.business.VerificationServiceOperation;
+import com.flipkart.dao.CustomerDAOImplementation;
 import com.flipkart.bean.User;
 import com.flipkart.business.VerificationServiceInterface;
 import com.flipkart.business.CustomerServiceOperation;
@@ -28,57 +29,65 @@ public class GymFlipFitApplication {
         	int option = in.nextInt();
         	String emailID, password,role;
         	boolean flag = false;
+        	CustomerDAOImplementation dao = new CustomerDAOImplementation();
+			dao.init();
+			VerificationServiceInterface verifier = new VerificationServiceOperation();
         	switch (option) {
         		case 1:
-        			CustomerServiceOperation.init();
-//        			User userLogin = new User();
-//        			System.out.println("Enter emailID");
-//        			userLogin.setEmailID(in.next());
-//        			System.out.println("Enter password");
-//        			userLogin.setPassword(in.next());
-//        			System.out.println("Enter your role (Customer/GymOwner/Admin)");
-//        			userLogin.setRole(in.next());
-//        			VerificationServiceInterface verifier = new VerificationServiceOperation();
-//        			if(verifier.verifyCredentials(userLogin, userDetails)) {
-//        				System.out.println("Successfully logged in");
-//        				if(userLogin.getRole().equals("Customer")) {
-//            				GymFlipFitCustomerMenu.customerMenu(in);
-//            			}
-//            			else if(userLogin.getRole().equals("GymOwner")) {
-//            				GymFlipFitGymOwnerMenu.gymOwnerMenu(in);
-//            			}
-//            			else {
-//            				GymFlipFitAdminMenu.adminMenu(in);
-//            			}
-//        			}
-//        			else {
-//        				System.out.println("Incorrect/Invalid credentials");
-//        			}
-//        			break;
-//        		case 2:
-//        			User user  = new User();
-//        			System.out.println("Enter email ID");
-//        			user.setEmailID(in.next());
-//        			
-//        			System.out.println("Create a password");
-//        			user.setPassword(in.next());
-//        			System.out.println("Enter your role (Customer/GymOwner/Admin)");
-//        			user.setRole(in.next());
-//        			user.setID(Integer.toString(userDetails.size()+1));
-//        			userDetails.add(user);
-//        			System.out.println("Registration complete");
-//        			break;
-//        		case 3:
-//        			System.out.println("Enter current password");
-//        			String currentPassword = in.next();
-//        			System.out.println("Enter new password");
-//        			String newPassword = in.next();
-//        			System.out.println("Successfully changed the password");
-//        			break;
-//        		case 4:
-//        			in.close();
-//        			flag = true;
-//        			break;
+        			User userLogin = new User(false);
+        			System.out.println("Enter emailID");
+        			userLogin.setEmailID(in.next());
+        			System.out.println("Enter password");
+        			userLogin.setPassword(in.next());
+        			System.out.println("Enter your role (Customer/GymOwner/Admin)");
+        			userLogin.setRole(in.next());
+        			
+        			if(verifier.verifyCredentials(userLogin)) {
+        				System.out.println("Successfully logged in");
+        				if(userLogin.getRole().equals("Customer")) {
+            				GymFlipFitCustomerMenu.customerMenu(in);
+            			}
+            			else if(userLogin.getRole().equals("GymOwner")) {
+            				GymFlipFitGymOwnerMenu.gymOwnerMenu(in);
+            			}
+            			else {
+            				GymFlipFitAdminMenu.adminMenu(in);
+            			}
+        			}
+        			else {
+        				System.out.println("Incorrect/Invalid credentials");
+        			}
+        			break;
+        		case 2:
+        			User user  = new User(true);
+        			System.out.println("Enter email ID");
+        			user.setEmailID(in.next());
+        			System.out.println("Create a password");
+        			user.setPassword(in.next());
+        			System.out.println("Enter your role (Customer/GymOwner/Admin)");
+        			user.setRole(in.next());
+        			
+        			dao.insertUserDB(user);
+        			System.out.println("Registration complete");
+        			break;
+        		case 3:
+        			user = new User(false);
+        			System.out.println("Enter emailID");
+        			user.setEmailID(in.next());
+        			System.out.println("Enter current password");
+        			user.setPassword(in.next());
+        			System.out.println("Enter your role (Customer/GymOwner/Admin)");
+        			user.setRole(in.next());
+        			if(verifier.verifyCredentials(user)) {
+        				System.out.println("Enter your new password:");
+        				String newPassword = in.next();
+        				dao.updateUserDB(user,newPassword);
+        			}
+        			break;
+        		case 4:
+        			in.close();
+        			flag = true;
+        			break;
         		default:
         			System.out.println("Please enter a valid option.");
         			break;
