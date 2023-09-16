@@ -3,29 +3,31 @@
  */
 package com.flipkart.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import com.flipkart.bean.User;
+import com.flipkart.utils.DatabaseConnector;
 
 /**
  * 
  */
 public class UserDAOImplementation implements UserDAOInterface{
-	DatabaseConnector dbc;
-	public UserDAOImplementation() {
-		dbc = new DatabaseConnector();
-	}
+
 
 	@Override
 	public void insertUserDB(User user) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
 		try {
-
+			conn = DatabaseConnector.getConnection();
 			String sql = "insert into User (email,password,role) values(?,?,?)";
-			dbc.stmt = dbc.conn.prepareStatement(sql);
-			dbc.stmt.setString(1, user.getEmailID());
-			dbc.stmt.setString(2, user.getPassword());
-			dbc.stmt.setString(3, user.getRole());
-			dbc.stmt.executeUpdate();
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, user.getEmailID());
+			stmt.setString(2, user.getPassword());
+			stmt.setString(3, user.getRole());
+			stmt.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -35,15 +37,17 @@ public class UserDAOImplementation implements UserDAOInterface{
 	@Override
 	public void updateUserDB(User user, String password) {
 		// TODO Auto-generated method stub
+		Connection conn = null;
+		PreparedStatement stmt = null;
 		try {
-
+			conn = DatabaseConnector.getConnection();
 			String sql = "update User set password=(?) where email=(?) and password=(?) and role=(?)";
-			dbc.stmt = dbc.conn.prepareStatement(sql);
-			dbc.stmt.setString(1, password);
-			dbc.stmt.setString(2, user.getEmailID());
-			dbc.stmt.setString(3, user.getPassword());
-			dbc.stmt.setString(4, user.getRole());
-			dbc.stmt.executeUpdate();
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, password);
+			stmt.setString(2, user.getEmailID());
+			stmt.setString(3, user.getPassword());
+			stmt.setString(4, user.getRole());
+			stmt.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -52,10 +56,13 @@ public class UserDAOImplementation implements UserDAOInterface{
 	@Override
 	public User getUserDB(User user) {
 		// TODO Auto-generated method stub
+		Connection conn = null;
+		PreparedStatement stmt = null;
 		try {
+			conn = DatabaseConnector.getConnection();
 			String sql = "SELECT * FROM User";
-			dbc.stmt = dbc.conn.prepareStatement(sql);
-		     ResultSet rs = dbc.stmt.executeQuery(sql);
+			stmt = conn.prepareStatement(sql);
+		     ResultSet rs = stmt.executeQuery(sql);
 		     User currUser = null;
 		      //STEP 5: Extract data from result set
 		      while(rs.next()){

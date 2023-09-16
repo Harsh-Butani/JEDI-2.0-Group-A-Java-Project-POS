@@ -13,23 +13,24 @@ import com.flipkart.bean.BookingList;
 import com.flipkart.bean.GymDetails;
 import com.flipkart.bean.SlotCatalogDetails;
 import com.flipkart.bean.User;
+import com.flipkart.utils.DatabaseConnector;
 
 /**
  *
  */
 public class CustomerDAOImplementation implements CustomerDAOInterface {
-	DatabaseConnector dbc;
-
-	public CustomerDAOImplementation() {
-		dbc = new DatabaseConnector();
-	}
 
 	@Override
 	public void queryAllGymDB() {
+		Connection conn = null;
+		PreparedStatement stmt = null;
 		try {
+
+			conn = DatabaseConnector.getConnection();
+
 			String sql = "select GymID, GymName, GymAddress from gym";
-			dbc.stmt = dbc.conn.prepareStatement(sql);
-			ResultSet rs = dbc.stmt.executeQuery(sql);
+			stmt = conn.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next()){
 				String gymID = rs.getString("gymID");
 				String gymName = rs.getString("gymName");
@@ -43,10 +44,13 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 
 	@Override
 	public Boolean queryBookingListDB(Integer UserID, Integer slotNumber) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
 		try {
-			String sql = "select UserID, slotNumber from bookingList where UserID = " + UserID + " and slotNumber = " + slotNumber;
-			dbc.stmt = dbc.conn.prepareStatement(sql);
-			ResultSet rs = dbc.stmt.executeQuery(sql);
+			conn = DatabaseConnector.getConnection();
+			String sql = "select UserID, slotNumber from BookingList where UserID = " + UserID + " and slotNumber = " + slotNumber;
+			stmt = conn.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery(sql);
 			if(rs.next()){
 				return true;
 			}
@@ -59,15 +63,18 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 
 	@Override
 	public void decreaseSeatsSlotDB(Integer gymID, Integer slotNumber) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
 		try {
+			conn = DatabaseConnector.getConnection();
 			String sql = "select availableSeats from slot where gymID = " + gymID + " and slotNumber = " + slotNumber;
-			dbc.stmt = dbc.conn.prepareStatement(sql);
-			ResultSet rs = dbc.stmt.executeQuery(sql);
+			stmt = conn.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery(sql);
 			Integer currentSeats = rs.getInt("availableSeats");
 			currentSeats--;
 			sql = "update slot set availableSeats = " + currentSeats + " wherer gymID = " + gymID + " and slotNumber = " + slotNumber;
-			dbc.stmt = dbc.conn.prepareStatement(sql);
-			dbc.stmt.executeUpdate(sql);
+			stmt = conn.prepareStatement(sql);
+			stmt.executeUpdate(sql);
 		} catch(Exception e) {
 			System.out.println(e);
 		}
@@ -75,10 +82,13 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 
 	@Override
 	public void addBookingListDB(Integer userID, Integer gymID, Integer slotNumber) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
 		try {
+			conn = DatabaseConnector.getConnection();
 			String sql = "insert into bookingList values ( " + userID + " , " + gymID + " , " + slotNumber + ")";
-			dbc.stmt = dbc.conn.prepareStatement(sql);
-			dbc.stmt.executeUpdate();
+			stmt = conn.prepareStatement(sql);
+			stmt.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -86,15 +96,18 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 
 	@Override
 	public void increaseSeatsSlotDB(Integer gymID, Integer slotNumber) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
 		try {
+			conn = DatabaseConnector.getConnection();
 			String sql = "select availableSeats from slot where gymID = " + gymID + " and slotNumber = " + slotNumber;
-			dbc.stmt = dbc.conn.prepareStatement(sql);
-			ResultSet rs = dbc.stmt.executeQuery(sql);
+			stmt = conn.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery(sql);
 			Integer currentSeats = rs.getInt("availableSeats");
 			currentSeats++;
 			sql = "update slot set availableSeats = " + currentSeats + " wherer gymID = " + gymID + " and slotNumber = " + slotNumber;
-			dbc.stmt = dbc.conn.prepareStatement(sql);
-			dbc.stmt.executeUpdate(sql);
+			stmt = conn.prepareStatement(sql);
+			stmt.executeUpdate(sql);
 		} catch(Exception e) {
 			System.out.println(e);
 		}
@@ -102,10 +115,13 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 
 	@Override
 	public void deleteBookingListDB(Integer userID, Integer slotNumber) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
 		try {
+			conn = DatabaseConnector.getConnection();
 			String sql = "delete from bookingList where userID = " + userID + " and slotNumber = " + slotNumber;
-			dbc.stmt = dbc.conn.prepareStatement(sql);
-			dbc.stmt.executeUpdate(sql);
+			stmt = conn.prepareStatement(sql);
+			stmt.executeUpdate(sql);
 		} catch(Exception e) {
 			System.out.println(e);
 		}
@@ -113,10 +129,13 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 
 	@Override
 	public void queryBookingListDB(Integer userID) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
 		try {
+			conn = DatabaseConnector.getConnection();
 			String sql = "select * from bookingList where userID = " + userID;
-			dbc.stmt = dbc.conn.prepareStatement(sql);
-			ResultSet rs = dbc.stmt.executeQuery(sql);
+			stmt = conn.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next()){
 				Integer ruserID = rs.getInt("userID");
 				String gymID = rs.getString("gymID");
@@ -130,10 +149,13 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 
 	@Override
 	public void queryGymDB(Integer gymID) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
 		try {
+			conn = DatabaseConnector.getConnection();
 			String sql = "select * from gym where gymID = " + gymID;
-			dbc.stmt = dbc.conn.prepareStatement(sql);
-			ResultSet rs = dbc.stmt.executeQuery(sql);
+			stmt = conn.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery(sql);
 			if(rs.next()){
 				String gymName = rs.getString("gymName");
 				String gymAddress = rs.getString("gymAddress");
@@ -146,10 +168,13 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 
 	@Override
 	public void querySeatsSlotDB(Integer gymID) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
 		try {
+			conn = DatabaseConnector.getConnection();
 			String sql = "select slotNumber, availableSeats from slot where gymID = " + gymID + "and availableSeats > 0";
-			dbc.stmt = dbc.conn.prepareStatement(sql);
-			ResultSet rs = dbc.stmt.executeQuery(sql);
+			stmt = conn.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery(sql);
 			while(rs.next()){
 				Integer slotNumber = rs.getInt("slotNumber");
 				Integer availableSeats = rs.getInt("availableSeats");
@@ -162,10 +187,13 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 
 	@Override
 	public Boolean queryBookingListDB(Integer UserID, Integer slotNumber, Integer gymID) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
 		try {
+			conn = DatabaseConnector.getConnection();
 			String sql = "select UserID, slotNumber from bookingList where UserID = " + UserID + " and slotNumber = " + slotNumber + " and gymID = " + gymID;
-			dbc.stmt = dbc.conn.prepareStatement(sql);
-			ResultSet rs = dbc.stmt.executeQuery(sql);
+			stmt = conn.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery(sql);
 			if(rs.next()){
 				return true;
 			}
@@ -179,7 +207,7 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 //
 //	public void init() {
 //		dbc = new DatabaseConnector();
-//		dbc.init();
+//		init();
 //	}
 //
 //	@Override
@@ -188,12 +216,12 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 //		try {
 //
 //			String sql = "insert into User values(?,?,?,?)";
-//			dbc.stmt = dbc.conn.prepareStatement(sql);
-//			dbc.stmt.setInt(1, user.getUserID());
-//			dbc.stmt.setString(2, user.getEmailID());
-//			dbc.stmt.setString(3, user.getPassword());
-//			dbc.stmt.setString(4, user.getRole());
-//			dbc.stmt.executeUpdate();
+//			stmt = conn.prepareStatement(sql);
+//			stmt.setInt(1, user.getUserID());
+//			stmt.setString(2, user.getEmailID());
+//			stmt.setString(3, user.getPassword());
+//			stmt.setString(4, user.getRole());
+//			stmt.executeUpdate();
 //		} catch (Exception e) {
 //			System.out.println(e);
 //		}
@@ -204,12 +232,12 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 //		try {
 //
 //			String sql = "update User set password=(?) where email=(?) and password=(?) and role=(?)";
-//			dbc.stmt = dbc.conn.prepareStatement(sql);
-//			dbc.stmt.setString(1, password);
-//			dbc.stmt.setString(2, user.getEmailID());
-//			dbc.stmt.setString(3, user.getPassword());
-//			dbc.stmt.setString(4, user.getRole());
-//			dbc.stmt.executeUpdate();
+//			stmt = conn.prepareStatement(sql);
+//			stmt.setString(1, password);
+//			stmt.setString(2, user.getEmailID());
+//			stmt.setString(3, user.getPassword());
+//			stmt.setString(4, user.getRole());
+//			stmt.executeUpdate();
 //		} catch (Exception e) {
 //			System.out.println(e);
 //		}
@@ -219,8 +247,8 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 //		// TODO Auto-generated method stub
 //		try {
 //			String sql = "SELECT * FROM User";
-//			dbc.stmt = dbc.conn.prepareStatement(sql);
-//		     ResultSet rs = dbc.stmt.executeQuery(sql);
+//			stmt = conn.prepareStatement(sql);
+//		     ResultSet rs = stmt.executeQuery(sql);
 //		     User currUser = null;
 //		      //STEP 5: Extract data from result set
 //		      while(rs.next()){
@@ -259,10 +287,10 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 //		try {
 //
 ////			String sql = "insert into User values(?,?)";
-////			dbc.stmt = dbc.conn.prepareStatement(sql);
-////			dbc.stmt.setString(1, user.getEmailID());
-////			dbc.stmt.setString(2, user.getPassword());
-////			dbc.stmt.executeUpdate();
+////			stmt = conn.prepareStatement(sql);
+////			stmt.setString(1, user.getEmailID());
+////			stmt.setString(2, user.getPassword());
+////			stmt.executeUpdate();
 //		} catch (Exception e) {
 //			System.out.println(e);
 //		}
@@ -274,10 +302,10 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 //		try {
 //
 ////			String sql = "insert into User values(?,?)";
-////			dbc.stmt = dbc.conn.prepareStatement(sql);
-////			dbc.stmt.setString(1, user.getEmailID());
-////			dbc.stmt.setString(2, user.getPassword());
-////			dbc.stmt.executeUpdate();
+////			stmt = conn.prepareStatement(sql);
+////			stmt.setString(1, user.getEmailID());
+////			stmt.setString(2, user.getPassword());
+////			stmt.executeUpdate();
 //		} catch (Exception e) {
 //			System.out.println(e);
 //		}
