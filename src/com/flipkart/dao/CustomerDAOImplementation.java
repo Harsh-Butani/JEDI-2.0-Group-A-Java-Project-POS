@@ -105,7 +105,7 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 			ResultSet rs = stmt.executeQuery(sql);
 			Integer currentSeats = rs.getInt("availableSeats");
 			currentSeats++;
-			sql = "update slot set availableSeats = " + currentSeats + " wherer gymID = " + gymID + " and slotNumber = " + slotNumber;
+			sql = "update slot set availableSeats = " + currentSeats + " where gymID = " + gymID + " and slotNumber = " + slotNumber;
 			stmt = conn.prepareStatement(sql);
 			stmt.executeUpdate(sql);
 		} catch(Exception e) {
