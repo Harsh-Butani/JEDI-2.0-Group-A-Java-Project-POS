@@ -60,7 +60,7 @@ public class UserDAOImplementation implements UserDAOInterface{
 		PreparedStatement stmt = null;
 		try {
 			conn = DatabaseConnector.getConnection();
-			String sql = "SELECT * FROM User where email = " + user.getEmailID() + " and role = " + user.getRole() + " and password = " + user.getPassword();
+			String sql = "SELECT * FROM User where email = \"" + user.getEmailID() + "\" and role = \"" + user.getRole() + "\" and password = \"" + user.getPassword() + "\"";
 			stmt = conn.prepareStatement(sql);
 		    ResultSet rs = stmt.executeQuery(sql);
 		    User currUser = null;
@@ -89,7 +89,7 @@ public class UserDAOImplementation implements UserDAOInterface{
 		PreparedStatement stmt = null;
 		try {
 			conn = DatabaseConnector.getConnection();
-			String sql = "SELECT * FROM User where email = " + user.getEmailID() + " and role = " + user.getRole();
+			String sql = "SELECT * FROM User where email = \"" + user.getEmailID() + "\" and role = \"" + user.getRole() + "\"";
 			stmt = conn.prepareStatement(sql);
 		    ResultSet rs = stmt.executeQuery(sql);
 		      if(rs.next()){
