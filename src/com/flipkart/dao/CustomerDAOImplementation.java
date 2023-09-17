@@ -65,15 +65,17 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 			stmt.setInt(1,gymID);
 			stmt.setInt(2,slotNumber);
 			ResultSet rs = stmt.executeQuery();
-			Integer currentSeats = rs.getInt("availableSeats");
-			currentSeats--;
-
-			stmt = conn.prepareStatement(SQLConstants.DECREASE_AVAILABLE_SEATS_FROM_SLOT);
-			stmt.setInt(1,currentSeats);
-			stmt.setInt(2,gymID);
-			stmt.setInt(3,slotNumber);
-			stmt.executeUpdate();
+			if(rs.next()) {
+				Integer currentSeats = rs.getInt("availableSeats");
+				currentSeats--;
+				stmt = conn.prepareStatement(SQLConstants.DECREASE_AVAILABLE_SEATS_FROM_SLOT);
+				stmt.setInt(1,currentSeats);
+				stmt.setInt(2,gymID);
+				stmt.setInt(3,slotNumber);
+				stmt.executeUpdate();
+			}
 		} catch(Exception e) {
+			System.out.println("Inside cartch of decreaseSeats()");
 			System.out.println(e);
 		}
 	}
@@ -104,13 +106,15 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 			stmt.setInt(1,gymID);
 			stmt.setInt(2,slotNumber);
 			ResultSet rs = stmt.executeQuery();
-			Integer currentSeats = rs.getInt("availableSeats");
-			currentSeats++;
-			stmt = conn.prepareStatement(SQLConstants.INCREASE_AVAILABLE_SEATS_FROM_SLOT);
-			stmt.setInt(1,currentSeats);
-			stmt.setInt(2,gymID);
-			stmt.setInt(3,slotNumber);
-			stmt.executeUpdate();
+			if(rs.next()) {
+				Integer currentSeats = rs.getInt("availableSeats");
+				currentSeats++;
+				stmt = conn.prepareStatement(SQLConstants.INCREASE_AVAILABLE_SEATS_FROM_SLOT);
+				stmt.setInt(1,currentSeats);
+				stmt.setInt(2,gymID);
+				stmt.setInt(3,slotNumber);
+				stmt.executeUpdate();
+			}
 		} catch(Exception e) {
 			System.out.println(e);
 		}

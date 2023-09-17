@@ -3,15 +3,15 @@ package com.flipkart.bean;
  * @author kshitij.gupta1
  */
 public class SlotCatalogDetails {
-	private String gymID;
+	private Integer gymID;
 	private int slotNumber;
 	private int availableSeats;
-	private boolean availableStatus;
+	private int approvedStatus;
 	
-	public String getGymID() {
+	public Integer getGymID() {
 		return gymID;
 	}
-	public void setGymID(String gymID) {
+	public void setGymID(Integer gymID) {
 		this.gymID = gymID;
 	}
 	public int getSlotNumber() {
@@ -26,10 +26,10 @@ public class SlotCatalogDetails {
 	public void setAvailableSeats(int availableSeats) {
 		this.availableSeats = availableSeats;
 	}
-	public boolean isAvailableStatus() {
-		return availableStatus;
+	public int getApprovedStatus() {
+		return approvedStatus;
 	}
-	public void setAvailableStatus(boolean availableStatus) {
-		this.availableStatus = availableStatus;
+	public void setApprovedStatus(int approvedStatus) {
+		this.approvedStatus = approvedStatus;
 	}
 }

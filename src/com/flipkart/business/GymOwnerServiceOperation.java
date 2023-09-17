@@ -1,21 +1,40 @@
 package com.flipkart.business;
+
+import com.flipkart.bean.GymDetails;
+import com.flipkart.bean.SlotCatalogDetails;
+import com.flipkart.dao.AdminDAOImplementation;
+import com.flipkart.dao.AdminDAOInterface;
+import com.flipkart.dao.GymOwnerDAOImplementation;
+import com.flipkart.dao.GymOwnerDAOInterface;
+
 /**
  * @author kshitij.gupta1
  */
 public class GymOwnerServiceOperation implements GymOwnerServiceInterface{
 
+	
+	GymOwnerDAOInterface dao;
+	public GymOwnerServiceOperation(){
+		dao  = new GymOwnerDAOImplementation();
+	}
 	@Override
-	public boolean registerGym() {
+	public boolean registerGym(GymDetails gym) {
 		// TODO Auto-generated method stub
-		System.out.println("Cannot register gym");
-		return false;
+		dao.insertGymDB(gym.getGymOwnerID(), gym.getGymName(), gym.getGymAddress());
+		return true;
 	}
 
 	@Override
-	public String viewMyGyms() {
+	public void viewMyGyms(Integer gymOwnerID) {
 		// TODO Auto-generated method stub
-		System.out.println("Can't view your gyms as you don't have any");
-		return null;
+		dao.queryGymDB(gymOwnerID);
 	}
 	
+	public Integer fetchGymID(Integer gymOwnerID, String gymName, String gymAddress) {
+		return dao.queryGymDB(gymOwnerID, gymName, gymAddress);
+	}
+	
+	public void addSlots(SlotCatalogDetails slot) {
+		dao.insertSlotDB(slot);
+	}
 }
