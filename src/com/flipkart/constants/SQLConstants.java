@@ -10,8 +10,8 @@ public class SQLConstants {
     public static final String VIEW_GYMS_QUERY = "select GymID, GymName, GymAddress from gym";
     public static final String REGISTER_USER_QUERY = "insert into User (email,password,role) values(?,?,?)";
     public static final String UPDATE_USER_PASSWORD_QUERY = "update User set password=(?) where email=(?) and password=(?) and role=(?)";
-    public static final String QUERY_USER_DB_FOR_EMAIL_PASSWORD_ROLE = "SELECT * FROM User where email = (?) and password = (?) and role = (?)";
     public static final String QUERY_USER_DB_FOR_EMAIL_ROLE = "SELECT * FROM User where email = (?) and role = (?)";
+    public static final String QUERY_USER_DB_FOR_EMAIL_ROLE_PASSWORD = "SELECT * FROM User where email = (?) and role = (?) and password = (?)";
     public static final String VIEW_CUSTOMER_BOOKING_LIST_DB_QUERY = "select UserID, slotNumber from BookingList where UserID = (?) and slotNumber = (?)";
     public static final String VIEW_AVAILABLE_SEATS_FROM_SLOT_FOR_DECREASE = "select availableSeats from slot where gymID = (?) and slotNumber = (?)";
     public static final String DECREASE_AVAILABLE_SEATS_FROM_SLOT = "update slot set availableSeats = (?) where gymID = (?) and slotNumber =(?)";

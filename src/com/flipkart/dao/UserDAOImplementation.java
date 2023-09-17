@@ -53,44 +53,42 @@ public class UserDAOImplementation implements UserDAOInterface{
 		}
 	}
 	
-	@Override
-	public User getUserDB(User user) {
-		// TODO Auto-generated method stub
-		Connection conn = null;
-		PreparedStatement stmt = null;
-		try {
-			conn = DatabaseConnector.getConnection();
-
-
-			stmt = conn.prepareStatement(SQLConstants.QUERY_USER_DB_FOR_EMAIL_PASSWORD_ROLE);
-
-			stmt.setString(1, user.getEmailID());
-
-			stmt.setString(2, user.getPassword());
-
-			stmt.setString(3, user.getRole());
-
-		    ResultSet rs = stmt.executeQuery();
-
-		    User currUser = null;
-		    while(rs.next()){
-		        String email = rs.getString("email");
-		        String password = rs.getString("password");
-		        String role = rs.getString("role");
-		        if(email.equals(user.getEmailID()) && password.equals(user.getPassword()) && role.equals(user.getRole())){
-		        	currUser = new User();
-			        currUser.setEmailID(email);
-			        currUser.setPassword(password);
-			        currUser.setRole(role);
-			        return currUser;
-		        }
-		    }
-		    return null;
-		} catch (Exception e) {
-			System.out.println(e);
-			return null;
-		}
-	}
+//	@Override
+//	public User getUserDB(User user) {
+//		// TODO Auto-generated method stub
+//		Connection conn = null;
+//		PreparedStatement stmt = null;
+//		try {
+//			conn = DatabaseConnector.getConnection();
+//
+//
+//			stmt = conn.prepareStatement(SQLConstants.QUERY_USER_DB_FOR_EMAIL_ROLE);
+//
+//			stmt.setString(1, user.getEmailID());
+//
+//			stmt.setString(2, user.getRole());
+//
+//		    ResultSet rs = stmt.executeQuery();
+//
+//		    User currUser = null;
+//		    while(rs.next()){
+//		        String email = rs.getString("email");
+//		        String password = rs.getString("password");
+//		        String role = rs.getString("role");
+//		        if(email.equals(user.getEmailID()) && role.equals(user.getRole())){
+//		        	currUser = new User();
+//			        currUser.setEmailID(email);
+//			        currUser.setPassword(password);
+//			        currUser.setRole(role);
+//			        return currUser;
+//		        }
+//		    }
+//		    return null;
+//		} catch (Exception e) {
+//			System.out.println(e);
+//			return null;
+//		}
+//	}
 
 	@Override
 	public Boolean queryUserDB(User user) {
@@ -103,6 +101,29 @@ public class UserDAOImplementation implements UserDAOInterface{
 			stmt = conn.prepareStatement(SQLConstants.QUERY_USER_DB_FOR_EMAIL_ROLE);
 			stmt.setString(1,user.getEmailID());
 			stmt.setString(2, user.getRole());
+		    ResultSet rs = stmt.executeQuery();
+		      if(rs.next()){
+		         return true;
+		      }
+		      return false;
+		} catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
+	}
+
+	@Override
+	public Boolean queryDetailsUserDB(User user) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		try {
+			conn = DatabaseConnector.getConnection();
+
+
+			stmt = conn.prepareStatement(SQLConstants.QUERY_USER_DB_FOR_EMAIL_ROLE_PASSWORD);
+			stmt.setString(1, user.getEmailID());
+			stmt.setString(2, user.getRole());
+			stmt.setString(3, user.getPassword());
 		    ResultSet rs = stmt.executeQuery();
 		      if(rs.next()){
 		         return true;

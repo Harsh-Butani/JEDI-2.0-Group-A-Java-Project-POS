@@ -15,11 +15,10 @@ public class VerificationServiceOperation implements VerificationServiceInterfac
 	}
 	@Override
 	public boolean verifyCredentials(User user) throws UserNotRegisteredException {
-		User isRegisteredUser = userDAO.getUserDB(user);
-		if(isRegisteredUser!=null) {
-			return true;
+		if(!userDAO.queryUserDB(user)) {
+			throw new UserNotRegisteredException(user.getEmailID(), user.getRole());
 		}
-		throw new UserNotRegisteredException(user.getEmailID(), user.getRole());
+		return userDAO.queryDetailsUserDB(user);
 	}
 
 }

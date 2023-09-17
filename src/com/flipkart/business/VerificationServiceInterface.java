@@ -12,6 +12,4 @@ import com.flipkart.exception.UserNotRegisteredException;
  */
 public interface VerificationServiceInterface {
 	public boolean verifyCredentials(User user) throws UserNotRegisteredException;
-
-
 }

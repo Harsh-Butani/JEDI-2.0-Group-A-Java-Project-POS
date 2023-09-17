@@ -38,11 +38,11 @@ public class UserServiceOperation implements UserServiceInterface{
 		userDAO.updateUserDB(user,password);
 	}
 	
-	@Override
-	public User getUser(User user) {
-		// TODO Auto-generated method stub
-		return userDAO.getUserDB(user);	
-	}
+//	@Override
+//	public User getUser(User user) {
+//		// TODO Auto-generated method stub
+//		return userDAO.getUserDB(user);	
+//	}
 
 	@Override
 	public void registerGymOwner(GymOwner gymOwner) {

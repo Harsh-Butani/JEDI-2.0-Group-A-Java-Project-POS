@@ -115,12 +115,17 @@ public class GymFlipFitApplication {
         			user.setPassword(in.next());
         			System.out.println("Enter your role (Customer/GymOwner/Admin)");
         			user.setRole(in.next());
-        			if(verifier.verifyCredentials(user)) {
-        				System.out.println("Enter your new password:");
-        				String newPassword = in.next();
-        				userService.updateUser(user,newPassword);
-        			}else {
-        				System.out.println("Please enter correct password.");
+        			try {
+	        			if(verifier.verifyCredentials(user)) {
+	        				System.out.println("Enter your new password:");
+	        				String newPassword = in.next();
+	        				userService.updateUser(user,newPassword);
+	        			}else {
+	        				System.out.println("Please enter correct password.");
+	        			}
+        			}
+        			catch(UserNotRegisteredException e) {
+        				System.out.println("User with email ID " + e.getEmail() + " and role " + e.getRole() + " not registered");
         			}
         			break;
         		case 4:

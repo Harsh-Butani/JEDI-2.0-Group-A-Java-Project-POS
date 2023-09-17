@@ -11,6 +11,7 @@ import com.flipkart.bean.User;
 public interface UserDAOInterface {
 	public void insertUserDB(User user);
 	public void updateUserDB(User user,String password);
-	public User getUserDB(User user);
+//	public User getUserDB(User user);
 	public Boolean queryUserDB(User user);
+	public Boolean queryDetailsUserDB(User user);
 }
