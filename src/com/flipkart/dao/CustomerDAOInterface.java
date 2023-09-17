@@ -28,4 +28,6 @@ public interface CustomerDAOInterface {
 	public void querySeatsSlotDB(Integer GymID);
 	public Boolean queryBookingListDB(Integer UserID, Integer slotNumber, Integer gymID);
 	public Boolean slotFull(Integer gymID, Integer slotNumber);
+
+	public Integer queryCancelBookingDB(Integer UserID, Integer slotNumber);
 }

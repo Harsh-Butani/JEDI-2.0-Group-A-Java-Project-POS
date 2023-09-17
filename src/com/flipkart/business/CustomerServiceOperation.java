@@ -29,7 +29,7 @@ public class CustomerServiceOperation implements CustomerServiceInterface{
 		}
 		if(dao.queryBookingListDB(userID, slotNumber)) {
 			try {
-				cancelBookedSlots(gymID, slotNumber, userID);
+				cancelBookedSlots(slotNumber, userID);
 			} catch (SlotNotBookedException e) {
 				e.printStackTrace();
 			}
@@ -41,10 +41,18 @@ public class CustomerServiceOperation implements CustomerServiceInterface{
 
 	@Override
 	public boolean cancelBookedSlots(Integer gymID, Integer slotNumber, Integer userID) throws SlotNotBookedException {
-		if(!dao.queryBookingListDB(userID, slotNumber, gymID)) {
+		if(!dao.queryBookingListDB(userID, slotNumber)) {
 			throw new SlotNotBookedException(gymID, slotNumber);
 		}
 		dao.increaseSeatsSlotDB(gymID, slotNumber);
+		dao.deleteBookingListDB(userID, slotNumber);
+		return true;
+	}
+
+	@Override
+	public boolean cancelBookedSlots(Integer slotNumber, Integer userID) throws SlotNotBookedException {
+		Integer oldGymID = dao.queryCancelBookingDB(userID, slotNumber);
+		dao.increaseSeatsSlotDB(oldGymID, slotNumber);
 		dao.deleteBookingListDB(userID, slotNumber);
 		return true;
 	}

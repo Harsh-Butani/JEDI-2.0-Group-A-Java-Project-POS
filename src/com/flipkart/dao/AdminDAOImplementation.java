@@ -111,6 +111,10 @@ public class AdminDAOImplementation implements AdminDAOInterface{
 			stmt.setInt(1, gymID);
 			stmt.executeUpdate();
 
+			stmt = conn.prepareStatement(SQLConstants.APPROVE_SLOTS_OF_APPROVED_GYM);
+			stmt.setInt(1,gymID);
+			stmt.executeUpdate();
+
 		} catch(Exception e) {
 			System.out.println(e);
 		}
@@ -125,6 +129,9 @@ public class AdminDAOImplementation implements AdminDAOInterface{
 
 			conn = DatabaseConnector.getConnection();
 			stmt = conn.prepareStatement(SQLConstants.APPROVE_ALL_PENDING_GYM_REGISTRATION_QUERY);
+			stmt.executeUpdate();
+
+			stmt = conn.prepareStatement(SQLConstants.APPROVE_ALL_SLOTS_OF_APPROVED_GYM);
 			stmt.executeUpdate();
 
 		} catch(Exception e) {

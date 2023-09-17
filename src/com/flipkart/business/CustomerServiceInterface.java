@@ -23,4 +23,7 @@ public interface CustomerServiceInterface {
 	// public void checkBookingList();
 
 	public void checkAvailableSlots(Integer gymID);
+
+	public boolean cancelBookedSlots(Integer slotNumber, Integer userID) throws SlotNotBookedException;
+
 }

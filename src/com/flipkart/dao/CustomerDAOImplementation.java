@@ -55,6 +55,26 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 	}
 
 	@Override
+	public Integer queryCancelBookingDB(Integer UserID, Integer slotNumber) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		try {
+			conn = DatabaseConnector.getConnection();
+			stmt = conn.prepareStatement(SQLConstants.VIEW_CUSTOMER_BOOKING_LIST_DB_QUERY);
+			stmt.setInt(1, UserID);
+			stmt.setInt(2, slotNumber);
+			ResultSet rs = stmt.executeQuery();
+			if(rs.next()){
+				return rs.getInt("gymID");
+			}
+			return -1;
+		} catch(Exception e) {
+			System.out.println(e);
+			return -1;
+		}
+	}
+
+	@Override
 	public void decreaseSeatsSlotDB(Integer gymID, Integer slotNumber) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
