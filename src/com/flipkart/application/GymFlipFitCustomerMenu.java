@@ -7,33 +7,59 @@ package com.flipkart.application;
  */
 import java.util.Scanner;
 
+import com.flipkart.bean.User;
 import com.flipkart.business.CustomerServiceInterface;
 import com.flipkart.business.CustomerServiceOperation;
+import com.flipkart.business.VerificationServiceInterface;
+import com.flipkart.business.VerificationServiceOperation;
 import com.flipkart.exception.SlotFullException;
 import com.flipkart.exception.SlotNotBookedException;
+import com.flipkart.exception.UserNotRegisteredException;
 
 /**
  * 
  */
 public class GymFlipFitCustomerMenu {
 	public static void customerMenu(Scanner in) {
-//		CustomerServiceOperation cs = new CustomerServiceOperation();
-//		CustomerServiceOperation.init();
-//		cs.viewGyms();
-//		cs.viewAllBookings("197982");
-//		cs.checkAvailableSlots("101");
-//		cs.getGymInfo("101");
-//		cs.bookSlot("101", 0, "197982");
-//		cs.viewAllBookings("197982");
-//		cs.checkAvailableSlots("101");
-//		cs.cancelBookedSlots("101", 0, "197982");
-//		cs.viewAllBookings("197982");
-//		cs.checkAvailableSlots("101");
-		
+
 		CustomerServiceInterface customer = new CustomerServiceOperation();
 		//CustomerServiceOperation.init();
-		System.out.println("Enter User ID: ");
-		Integer UserID = in.nextInt();
+		System.out.println("Do you know your UserID? Enter Y for yes and N for no");
+		String userChoice = in.next();
+		Integer UserID = null;
+		VerificationServiceInterface verifier = new VerificationServiceOperation();
+		User userLogin = new User();
+		switch (userChoice){
+			case "Y":
+				UserID = in.nextInt();
+				break;
+			case "N":
+				System.out.println("Enter your email:");
+				String email = in.next();
+				userLogin.setEmailID(email);
+				System.out.println("Enter your password:");
+				String password = in.next();
+				userLogin.setPassword(password);
+				userLogin.setRole("Customer");
+				try {
+					if(verifier.verifyCredentials(userLogin)) {
+						UserID = customer.getUserID(email,password,"Customer");
+					}
+					else {
+						System.out.println("Incorrect/Invalid credentials");
+						return;
+					}
+				}
+				catch(UserNotRegisteredException e) {
+					System.out.println("User with email ID " + e.getEmail() + " and role " + e.getRole() + " not registered");
+				}
+
+				break;
+			default:
+				System.out.println("Enter a valid choice!");
+
+		}
+
 		
 		while(true) {
 			System.out.println("----Customer Menu----");

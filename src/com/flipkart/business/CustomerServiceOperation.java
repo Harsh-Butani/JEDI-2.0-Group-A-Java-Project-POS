@@ -57,6 +57,12 @@ public class CustomerServiceOperation implements CustomerServiceInterface{
 	}
 
 	@Override
+	public int getUserID(String email, String password, String role) {
+
+		return dao.queryUserDBForID(email,password,role);
+	}
+
+	@Override
 	public boolean viewAllBookings(Integer userID) {
 		return dao.queryBookingListDB(userID);
 	}

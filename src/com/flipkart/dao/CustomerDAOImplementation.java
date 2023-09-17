@@ -79,6 +79,30 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 	}
 
 	@Override
+	public Integer queryUserDBForID(String email, String password, String role) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		try {
+			conn = DatabaseConnector.getConnection();
+			stmt = conn.prepareStatement(SQLConstants.QUERY_USER_DB_FOR_USERID);
+			stmt.setString(1,email);
+			stmt.setString(2,password);
+			stmt.setString(3,role);
+
+
+			ResultSet rs = stmt.executeQuery();
+			if(rs.next()){
+				return rs.getInt("UserID");
+			}
+			return -1;
+		} catch(Exception e) {
+			System.out.println(e);
+			return -1;
+		}
+
+	}
+
+	@Override
 	public void decreaseSeatsSlotDB(Integer gymID, Integer slotNumber) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -196,6 +220,8 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 				String gymName = rs.getString("gymName");
 				String gymAddress = rs.getString("gymAddress");
 				System.out.println("gymName: " + gymName + ", gymAddress: " + gymAddress);
+			}else{
+				System.out.println("No approved/registered gym with following gymID");
 			}
 		} catch(Exception e) {
 			System.out.println(e);

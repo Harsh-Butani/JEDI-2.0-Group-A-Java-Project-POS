@@ -7,15 +7,6 @@ package com.flipkart.dao;
  *
  */
 public interface CustomerDAOInterface {
-//	public void init();
-//	public void insertUserDB(User user);
-//	public void insertGymDB(GymDetails gym);
-//	public void insertBookingListDB(BookingList list);
-//	public void insertSlotCatalogDB(SlotCatalogDetails slot);
-//
-//	public void updateUserDB(User user, String password);
-//
-//	public User getUser(User user);
 
 	public boolean queryAllGymDB();
 	public Boolean queryBookingListDB(Integer UserID, Integer slotNumber);
@@ -30,4 +21,5 @@ public interface CustomerDAOInterface {
 	public Boolean slotFull(Integer gymID, Integer slotNumber);
 
 	public Integer queryCancelBookingDB(Integer UserID, Integer slotNumber);
+	public Integer queryUserDBForID(String email, String password, String role);
 }

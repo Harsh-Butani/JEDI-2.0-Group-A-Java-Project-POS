@@ -25,5 +25,6 @@ public interface CustomerServiceInterface {
 	public boolean checkAvailableSlots(Integer gymID);
 
 	public boolean cancelBookedSlots(Integer slotNumber, Integer userID) throws SlotNotBookedException;
+	public int getUserID(String email, String password, String role);
 
 }

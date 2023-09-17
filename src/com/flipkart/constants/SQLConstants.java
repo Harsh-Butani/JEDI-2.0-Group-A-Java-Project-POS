@@ -20,7 +20,7 @@ public class SQLConstants {
     public static final String INCREASE_AVAILABLE_SEATS_FROM_SLOT = "update slot set availableSeats = (?) where gymID = (?) and slotNumber =(?)";
     public static final String DELETE_BOOKING_FROM_BOOKINGLIST = "delete from bookingList where userID = (?) and slotNumber = (?)";
     public static final String VIEW_ALL_BOOKINGS_OF_A_USER = "select * from bookingList where userID =(?)";
-    public static final String VIEW_INFO_OF_A_PARTICULAR_GYM = "select * from gym where gymID = (?)";
+    public static final String VIEW_INFO_OF_A_PARTICULAR_GYM = "select * from gym where gymID = (?) and ApprovalStatus = 1";
     public static final String VIEW_ALL_AVAILABLE_SLOTS_OF_A_PARTICULAR_GYM = "select slotNumber, availableSeats from slot where gymID = (?) and availableSeats > 0 and ApprovedStatus = 1";
     public static final String VIEW_BOOKING_OF_A_USER_FOR_CANCELLATION = "select UserID, slotNumber from BookingList where UserID = (?) and slotNumber = (?) and gymID = (?)";
     public static final String CHECK_SEATS_AVAILABLE_FOR_GIVEN_GYM_AND_SLOT = "select availableSeats from Slot where gymID = (?) and slotNumber = (?) and availableSeats > 0";
@@ -35,4 +35,5 @@ public class SQLConstants {
     public static final String APPROVE_SLOTS_OF_APPROVED_GYM = "update Slot set ApprovedStatus = 1 where gymID = (?)";
     public static final String APPROVE_ALL_SLOTS_OF_APPROVED_GYM ="update Slot set ApprovedStatus = 1";
     public static final String QUERY_ID_GYMOWNER_DB = "select GymOwnerID from GymOwner where emailID = (?)";
+    public static final String QUERY_USER_DB_FOR_USERID = "select UserID from User where email =(?) and password = (?) and role = (?)";
 }
