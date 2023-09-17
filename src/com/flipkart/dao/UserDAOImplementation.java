@@ -41,8 +41,8 @@ public class UserDAOImplementation implements UserDAOInterface{
 		PreparedStatement stmt = null;
 		try {
 			conn = DatabaseConnector.getConnection();
-			String sql = "update User set password=(?) where email=(?) and password=(?) and role=(?)";
-			stmt = conn.prepareStatement(sql);
+
+			stmt = conn.prepareStatement(SQLConstants.UPDATE_USER_PASSWORD_QUERY);
 			stmt.setString(1, password);
 			stmt.setString(2, user.getEmailID());
 			stmt.setString(3, user.getPassword());
@@ -60,9 +60,18 @@ public class UserDAOImplementation implements UserDAOInterface{
 		PreparedStatement stmt = null;
 		try {
 			conn = DatabaseConnector.getConnection();
-			String sql = "SELECT * FROM User where email = \"" + user.getEmailID() + "\" and role = \"" + user.getRole() + "\" and password = \"" + user.getPassword() + "\"";
-			stmt = conn.prepareStatement(sql);
-		    ResultSet rs = stmt.executeQuery(sql);
+
+
+			stmt = conn.prepareStatement(SQLConstants.QUERY_USER_DB_FOR_EMAIL_PASSWORD_ROLE);
+
+			stmt.setString(1, user.getEmailID());
+
+			stmt.setString(2, user.getPassword());
+
+			stmt.setString(3, user.getRole());
+
+		    ResultSet rs = stmt.executeQuery();
+
 		    User currUser = null;
 		    while(rs.next()){
 		        String email = rs.getString("email");
@@ -89,16 +98,19 @@ public class UserDAOImplementation implements UserDAOInterface{
 		PreparedStatement stmt = null;
 		try {
 			conn = DatabaseConnector.getConnection();
-			String sql = "SELECT * FROM User where email = \"" + user.getEmailID() + "\" and role = \"" + user.getRole() + "\"";
-			stmt = conn.prepareStatement(sql);
-		    ResultSet rs = stmt.executeQuery(sql);
+
+
+			stmt = conn.prepareStatement(SQLConstants.QUERY_USER_DB_FOR_EMAIL_ROLE);
+			stmt.setString(1,user.getEmailID());
+			stmt.setString(2, user.getRole());
+		    ResultSet rs = stmt.executeQuery();
 		      if(rs.next()){
 		         return true;
 		      }
 		      return false;
 		} catch (Exception e) {
 			System.out.println(e);
-			return null;
+			return false;
 		}
 	}
 	

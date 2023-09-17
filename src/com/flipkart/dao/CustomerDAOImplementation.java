@@ -40,9 +40,10 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 		PreparedStatement stmt = null;
 		try {
 			conn = DatabaseConnector.getConnection();
-			String sql = "select UserID, slotNumber from BookingList where UserID = " + UserID + " and slotNumber = " + slotNumber;
-			stmt = conn.prepareStatement(sql);
-			ResultSet rs = stmt.executeQuery(sql);
+			stmt = conn.prepareStatement(SQLConstants.VIEW_CUSTOMER_BOOKING_LIST_DB_QUERY);
+			stmt.setInt(1, UserID);
+			stmt.setInt(2, slotNumber);
+			ResultSet rs = stmt.executeQuery();
 			if(rs.next()){
 				return true;
 			}
@@ -59,14 +60,19 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 		PreparedStatement stmt = null;
 		try {
 			conn = DatabaseConnector.getConnection();
-			String sql = "select availableSeats from slot where gymID = " + gymID + " and slotNumber = " + slotNumber;
-			stmt = conn.prepareStatement(sql);
-			ResultSet rs = stmt.executeQuery(sql);
+
+			stmt = conn.prepareStatement(SQLConstants.VIEW_AVAILABLE_SEATS_FROM_SLOT_FOR_DECREASE);
+			stmt.setInt(1,gymID);
+			stmt.setInt(2,slotNumber);
+			ResultSet rs = stmt.executeQuery();
 			Integer currentSeats = rs.getInt("availableSeats");
 			currentSeats--;
-			sql = "update slot set availableSeats = " + currentSeats + " wherer gymID = " + gymID + " and slotNumber = " + slotNumber;
-			stmt = conn.prepareStatement(sql);
-			stmt.executeUpdate(sql);
+
+			stmt = conn.prepareStatement(SQLConstants.DECREASE_AVAILABLE_SEATS_FROM_SLOT);
+			stmt.setInt(1,currentSeats);
+			stmt.setInt(2,gymID);
+			stmt.setInt(3,slotNumber);
+			stmt.executeUpdate();
 		} catch(Exception e) {
 			System.out.println(e);
 		}
@@ -78,8 +84,10 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 		PreparedStatement stmt = null;
 		try {
 			conn = DatabaseConnector.getConnection();
-			String sql = "insert into bookingList values ( " + userID + " , " + gymID + " , " + slotNumber + ")";
-			stmt = conn.prepareStatement(sql);
+			stmt = conn.prepareStatement(SQLConstants.ADD_BOOKING_TO_CUSTOMER_BOOKINGLIST);
+			stmt.setInt(1,userID);
+			stmt.setInt(2,gymID);
+			stmt.setInt(3,slotNumber);
 			stmt.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e);
@@ -92,14 +100,17 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 		PreparedStatement stmt = null;
 		try {
 			conn = DatabaseConnector.getConnection();
-			String sql = "select availableSeats from slot where gymID = " + gymID + " and slotNumber = " + slotNumber;
-			stmt = conn.prepareStatement(sql);
-			ResultSet rs = stmt.executeQuery(sql);
+			stmt = conn.prepareStatement(SQLConstants.VIEW_AVAILABLE_SEATS_FROM_SLOT_FOR_INCREASE);
+			stmt.setInt(1,gymID);
+			stmt.setInt(2,slotNumber);
+			ResultSet rs = stmt.executeQuery();
 			Integer currentSeats = rs.getInt("availableSeats");
 			currentSeats++;
-			sql = "update slot set availableSeats = " + currentSeats + " where gymID = " + gymID + " and slotNumber = " + slotNumber;
-			stmt = conn.prepareStatement(sql);
-			stmt.executeUpdate(sql);
+			stmt = conn.prepareStatement(SQLConstants.INCREASE_AVAILABLE_SEATS_FROM_SLOT);
+			stmt.setInt(1,currentSeats);
+			stmt.setInt(2,gymID);
+			stmt.setInt(3,slotNumber);
+			stmt.executeUpdate();
 		} catch(Exception e) {
 			System.out.println(e);
 		}
@@ -111,9 +122,10 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 		PreparedStatement stmt = null;
 		try {
 			conn = DatabaseConnector.getConnection();
-			String sql = "delete from bookingList where userID = " + userID + " and slotNumber = " + slotNumber;
-			stmt = conn.prepareStatement(sql);
-			stmt.executeUpdate(sql);
+			stmt = conn.prepareStatement(SQLConstants.DELETE_BOOKING_FROM_BOOKINGLIST);
+			stmt.setInt(1,userID);
+			stmt.setInt(2, slotNumber);
+			stmt.executeUpdate();
 		} catch(Exception e) {
 			System.out.println(e);
 		}
@@ -125,9 +137,9 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 		PreparedStatement stmt = null;
 		try {
 			conn = DatabaseConnector.getConnection();
-			String sql = "select * from bookingList where userID = " + userID;
-			stmt = conn.prepareStatement(sql);
-			ResultSet rs = stmt.executeQuery(sql);
+			stmt = conn.prepareStatement(SQLConstants.VIEW_ALL_BOOKINGS_OF_A_USER);
+			stmt.setInt(1,userID);
+			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
 				Integer ruserID = rs.getInt("userID");
 				String gymID = rs.getString("gymID");
@@ -145,9 +157,9 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 		PreparedStatement stmt = null;
 		try {
 			conn = DatabaseConnector.getConnection();
-			String sql = "select * from gym where gymID = " + gymID;
-			stmt = conn.prepareStatement(sql);
-			ResultSet rs = stmt.executeQuery(sql);
+			stmt = conn.prepareStatement(SQLConstants.VIEW_INFO_OF_A_PARTICULAR_GYM);
+			stmt.setInt(1,gymID);
+			ResultSet rs = stmt.executeQuery();
 			if(rs.next()){
 				String gymName = rs.getString("gymName");
 				String gymAddress = rs.getString("gymAddress");
@@ -164,9 +176,9 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 		PreparedStatement stmt = null;
 		try {
 			conn = DatabaseConnector.getConnection();
-			String sql = "select slotNumber, availableSeats from slot where gymID = " + gymID + "and availableSeats > 0";
-			stmt = conn.prepareStatement(sql);
-			ResultSet rs = stmt.executeQuery(sql);
+			stmt = conn.prepareStatement(SQLConstants.VIEW_ALL_AVAILABLE_SLOTS_OF_A_PARTICULAR_GYM);
+			stmt.setInt(1,gymID);
+			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
 				Integer slotNumber = rs.getInt("slotNumber");
 				Integer availableSeats = rs.getInt("availableSeats");
@@ -183,9 +195,11 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 		PreparedStatement stmt = null;
 		try {
 			conn = DatabaseConnector.getConnection();
-			String sql = "select UserID, slotNumber from bookingList where UserID = " + UserID + " and slotNumber = " + slotNumber + " and gymID = " + gymID;
-			stmt = conn.prepareStatement(sql);
-			ResultSet rs = stmt.executeQuery(sql);
+			stmt = conn.prepareStatement(SQLConstants.VIEW_BOOKING_OF_A_USER_FOR_CANCELLATION);
+			stmt.setInt(1,UserID);
+			stmt.setInt(2,slotNumber);
+			stmt.setInt(3,gymID);
+			ResultSet rs = stmt.executeQuery();
 			if(rs.next()){
 				return true;
 			}
@@ -202,9 +216,10 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 		PreparedStatement stmt = null;
 		try {
 			conn = DatabaseConnector.getConnection();
-			String sql = "select availableSeats from SlotCatalog where gymID = " + gymID + " and slotNumber = " + slotNumber + " and availableSeats > 0";
-			stmt = conn.prepareStatement(sql);
-			ResultSet rs = stmt.executeQuery(sql);
+			stmt = conn.prepareStatement(SQLConstants.CHECK_SEATS_AVAILABLE_FOR_GIVEN_GYM_AND_SLOT);
+			stmt.setInt(1,gymID);
+			stmt.setInt(2,slotNumber);
+			ResultSet rs = stmt.executeQuery();
 			if(rs.next()){
 				return false;
 			}
