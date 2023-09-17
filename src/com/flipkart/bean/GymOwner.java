@@ -6,7 +6,27 @@ public class GymOwner {
 	private String name;
 	private String address;
 	private int IDProof;
-	private String gymOwnerID;
+	private int gymOwnerID;
+
+	public String getEmailID() {
+		return emailID;
+	}
+
+	public void setEmailID(String emailID) {
+		this.emailID = emailID;
+	}
+
+	private  String emailID;
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	private String password;
 	
 	public String getName() {
 		return name;
@@ -26,10 +46,10 @@ public class GymOwner {
 	public void setIDProof(int iDProof) {
 		IDProof = iDProof;
 	}
-	public String getGymOwnerID() {
+	public int getGymOwnerID() {
 		return gymOwnerID;
 	}
-	public void setGymOwnerID(String gymOwnerID) {
+	public void setGymOwnerID(Integer gymOwnerID) {
 		this.gymOwnerID = gymOwnerID;
 	}
 }

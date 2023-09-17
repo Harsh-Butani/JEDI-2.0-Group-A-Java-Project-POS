@@ -4,7 +4,10 @@
 package com.flipkart.business;
 
 
+import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.User;
+import com.flipkart.dao.GymOwnerDAOImplementation;
+import com.flipkart.dao.GymOwnerDAOInterface;
 import com.flipkart.exception.AlreadyRegisteredException;
 import com.flipkart.dao.UserDAOImplementation;
 import com.flipkart.dao.UserDAOInterface;
@@ -15,8 +18,10 @@ import com.flipkart.dao.UserDAOInterface;
 public class UserServiceOperation implements UserServiceInterface{
 
 	UserDAOInterface userDAO;
+	GymOwnerDAOInterface gymOwnerDAO;
 	public UserServiceOperation() {
 		userDAO = new UserDAOImplementation();
+		gymOwnerDAO = new GymOwnerDAOImplementation();
 	}
 	@Override
 	public void registerUser(User user) throws AlreadyRegisteredException {
@@ -37,5 +42,10 @@ public class UserServiceOperation implements UserServiceInterface{
 	public User getUser(User user) {
 		// TODO Auto-generated method stub
 		return userDAO.getUserDB(user);	
+	}
+
+	@Override
+	public void registerGymOwner(GymOwner gymOwner) {
+		gymOwnerDAO.insertGymOwnerDB(gymOwner);
 	}
 }

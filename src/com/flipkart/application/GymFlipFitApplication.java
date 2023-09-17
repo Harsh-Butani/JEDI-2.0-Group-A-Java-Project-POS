@@ -5,6 +5,7 @@ package com.flipkart.application;
  */
 import java.util.Scanner;
 
+import com.flipkart.bean.GymOwner;
 import com.flipkart.business.VerificationServiceOperation;
 import com.flipkart.exception.AlreadyRegisteredException;
 import com.flipkart.exception.UserNotRegisteredException;
@@ -65,18 +66,46 @@ public class GymFlipFitApplication {
         		case 2:
         			User user  = new User();
         			System.out.println("Enter email ID");
-        			user.setEmailID(in.next());
+					String emailID = in.next();
+        			//user.setEmailID(in.next());
         			System.out.println("Create a password");
-        			user.setPassword(in.next());
+					String password = in.next();
+        			//user.setPassword(in.next());
         			System.out.println("Enter your role (Customer/GymOwner/Admin)");
-        			user.setRole(in.next());
-        			try {
-        				userService.registerUser(user);
-        				System.out.println("Registration complete");
-        			}
-        			catch(AlreadyRegisteredException e) {
-        				System.out.println("User with email ID " + e.getEmail() + " and role " + e.getRole() + " already exists");
-        			}
+					String role = in.next();
+        			//user.setRole(role);
+					switch (role){
+						case "GymOwner":
+							GymOwner gymOwner = new GymOwner();
+							gymOwner.setEmailID(emailID);
+							gymOwner.setPassword(password);
+							System.out.println("Enter your name");
+							gymOwner.setName(in.next());
+							System.out.println("Enter your Address");
+							gymOwner.setAddress(in.next());
+							System.out.println("Enter your IDProof( aadhar number )");
+							gymOwner.setIDProof(in.nextInt());
+
+							userService.registerGymOwner(gymOwner);
+							break;
+						case "Customer":
+							user.setEmailID(emailID);
+							user.setPassword(password);
+							user.setRole(role);
+							try {
+								userService.registerUser(user);
+								System.out.println("Registration complete");
+							}
+							catch(AlreadyRegisteredException e) {
+								System.out.println("User with email ID " + e.getEmail() + " and role " + e.getRole() + " already exists");
+							}
+							break;
+						default:
+							System.out.println("Please enter a valid role!");
+
+
+					}
+
         			break;
         		case 3:
         			user = new User();

@@ -6,6 +6,7 @@ package com.flipkart.dao;
 import com.flipkart.constants.SQLConstants;
 import com.flipkart.utils.DatabaseConnector;
 
+import java.rmi.server.RemoteRef;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,6 +27,21 @@ public class AdminDAOImplementation implements AdminDAOInterface{
 			stmt = conn.prepareStatement(SQLConstants.APPROVE_GYM_OWNER_QUERY);
 			stmt.setInt(1, gymOwnerID);
 			stmt.executeUpdate();
+			stmt = conn.prepareStatement(SQLConstants.FETCH_GYM_OWNER_DETAILS_JUST_APPROVED);
+			stmt.setInt(1,gymOwnerID);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()){
+				String emailID = rs.getString("emailID");
+				String password = rs.getString("password");
+				stmt = conn.prepareStatement(SQLConstants.INSERT_APPROVED_GYM_OWNERS_TO_USER_DB);
+				stmt.setString(1,emailID);
+				stmt.setString(2,password);
+				stmt.setString(3, "GymOwner");
+				stmt.executeUpdate();
+			}
+
+
+
 
 		} catch(Exception e) {
 			System.out.println(e);
@@ -41,6 +57,17 @@ public class AdminDAOImplementation implements AdminDAOInterface{
 		try {
 
 			conn = DatabaseConnector.getConnection();
+			stmt = conn.prepareStatement(SQLConstants.FETCH_PENDING_GYM_OWNERS_FOR_USER_DB_INSERTION);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()){
+				String emailID = rs.getString("emailID");
+				String password = rs.getString("password");
+				stmt = conn.prepareStatement(SQLConstants.INSERT_APPROVED_GYM_OWNERS_TO_USER_DB);
+				stmt.setString(1,emailID);
+				stmt.setString(2,password);
+				stmt.setString(3, "GymOwner");
+				stmt.executeUpdate();
+			}
 			stmt = conn.prepareStatement(SQLConstants.APPROVE_ALL_PENDING_GYM_OWNER_QUERY);
 			stmt.executeUpdate();
 
