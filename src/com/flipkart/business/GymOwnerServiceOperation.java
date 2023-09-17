@@ -37,4 +37,8 @@ public class GymOwnerServiceOperation implements GymOwnerServiceInterface{
 	public void addSlots(SlotCatalogDetails slot) {
 		dao.insertSlotDB(slot);
 	}
+	
+	public Integer getGymOwnerID(String email) {
+		return dao.getIDFromGymOwnerDB(email);
+	}
 }

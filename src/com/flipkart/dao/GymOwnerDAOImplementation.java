@@ -118,4 +118,25 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface{
 		}
 	}
 
+	@Override
+	public Integer getIDFromGymOwnerDB(String email) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		try {
+
+			conn = DatabaseConnector.getConnection();
+			stmt = conn.prepareStatement(SQLConstants.QUERY_ID_GYMOWNER_DB);
+			stmt.setString(1, email);
+			ResultSet rs = stmt.executeQuery();
+			if(rs.next()) {
+				return rs.getInt("GymOwnerID");
+			}
+			return -1;
+
+		} catch(Exception e) {
+			System.out.println(e);
+			return -1;
+		}
+	}
+
 }

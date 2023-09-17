@@ -27,7 +27,7 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 				String gymID = rs.getString("gymID");
 				String gymName = rs.getString("gymName");
 				String gymAddress = rs.getString("gymAddress");
-				System.out.println("GymID: " + gymID + ", GymName: " + gymName + "gymAddress: " + gymAddress);
+				System.out.println("GymID: " + gymID + ", GymName: " + gymName + ", GymAddress: " + gymAddress);
 			}
 		} catch(Exception e) {
 			System.out.println(e);
@@ -95,7 +95,7 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 				stmt.executeUpdate();
 			}
 		} catch(Exception e) {
-			System.out.println("Inside cartch of decreaseSeats()");
+			System.out.println("Inside catch of decreaseSeats()");
 			System.out.println(e);
 		}
 	}
@@ -168,7 +168,7 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 				Integer ruserID = rs.getInt("userID");
 				String gymID = rs.getString("gymID");
 				String slotNumber = rs.getString("slotNumber");
-				System.out.println("userID: " + ruserID + ", GymID: " + gymID + "slotNumber: " + slotNumber);
+				System.out.println("userID: " + ruserID + ", GymID: " + gymID + ", slotNumber: " + slotNumber);
 			}
 		} catch(Exception e) {
 			System.out.println(e);

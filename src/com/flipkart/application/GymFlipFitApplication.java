@@ -23,7 +23,7 @@ public class GymFlipFitApplication {
         while(true) {
         	System.out.println("----Menu----");
         	System.out.println("Press 1 for Login");
-        	System.out.println("Press 2 for Registration of Customer");
+        	System.out.println("Press 2 for Registration of User");
         	System.out.println("Press 3 for Updating Password");
         	System.out.println("Press 4 to Exit");
         	
@@ -71,7 +71,7 @@ public class GymFlipFitApplication {
         			System.out.println("Create a password");
 					String password = in.next();
         			//user.setPassword(in.next());
-        			System.out.println("Enter your role (Customer/GymOwner/Admin)");
+        			System.out.println("Enter your role (Customer/GymOwner)");
 					String role = in.next();
         			//user.setRole(role);
 					switch (role){
@@ -83,7 +83,7 @@ public class GymFlipFitApplication {
 							gymOwner.setName(in.next());
 							System.out.println("Enter your Address");
 							gymOwner.setAddress(in.next());
-							System.out.println("Enter your IDProof( aadhar number )");
+							System.out.println("Enter your IDProof(Aadhar number)");
 							gymOwner.setIDProof(in.nextInt());
 
 							userService.registerGymOwner(gymOwner);
@@ -117,7 +117,7 @@ public class GymFlipFitApplication {
         			user.setRole(in.next());
         			try {
 	        			if(verifier.verifyCredentials(user)) {
-	        				System.out.println("Enter your new password:");
+	        				System.out.println("Enter your new password: ");
 	        				String newPassword = in.next();
 	        				userService.updateUser(user,newPassword);
 	        			}else {

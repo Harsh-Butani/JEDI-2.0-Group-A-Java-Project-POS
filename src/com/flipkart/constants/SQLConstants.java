@@ -34,4 +34,5 @@ public class SQLConstants {
     public static final String QUERY_GYM_DB_FOR_GYMOWNER = "select * from gym where GymOwnerID = (?)";
     public static final String APPROVE_SLOTS_OF_APPROVED_GYM = "update Slot set ApprovedStatus = 1 where gymID = (?)";
     public static final String APPROVE_ALL_SLOTS_OF_APPROVED_GYM ="update Slot set ApprovedStatus = 1";
+    public static final String QUERY_ID_GYMOWNER_DB = "select GymOwnerID from GymOwner where emailID = (?)";
 }

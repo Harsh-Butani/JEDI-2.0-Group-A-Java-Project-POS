@@ -42,7 +42,7 @@ public class GymFlipFitAdminMenu {
 									System.out.println("These are the pending requests, choose one to approve\n");
 									admin.viewPendingGymOwnerRequests();
 									System.out.println("\n");
-									System.out.println("Enter GymOwnerID:");
+									System.out.println("Enter GymOwnerID: ");
 									int GymOwnerID = in.nextInt();
 									if(admin.approveGymOwnerRequest(GymOwnerID)) {
 
@@ -51,7 +51,7 @@ public class GymFlipFitAdminMenu {
 									}
 									break;
 								case "Y":
-									System.out.println("Enter GymOwnerID:");
+									System.out.println("Enter GymOwnerID: ");
 									int GymOwnerID1 = in.nextInt();
 									if(admin.approveGymOwnerRequest(GymOwnerID1)) {
 
@@ -71,8 +71,9 @@ public class GymFlipFitAdminMenu {
 
 					break;
 				case 2:
-					System.out.println("These are the pending gym owner requests\n");
-					admin.viewPendingGymOwnerRequests();
+					if(!admin.viewPendingGymOwnerRequests()){
+						System.out.println("No pending gym owner registration requests");
+					}
 					break;
 				case 3:
 					System.out.println("Do you want to approve all requests? Enter Y for yes N for no");
@@ -87,10 +88,12 @@ public class GymFlipFitAdminMenu {
 							String choice = in.next();
 							switch (choice){
 								case "N":
-									System.out.println("These are the pending requests, choose one to approve\n");
-									admin.viewPendingGymRegistrations();
+									boolean isNonEmpty = admin.viewPendingGymRegistrations();
+									if(!isNonEmpty) {
+										System.out.println("No pending requests");
+									}
 									System.out.println("\n");
-									System.out.println("Enter GymID:");
+									System.out.println("Enter GymID: ");
 									int gymID = in.nextInt();
 									if(admin.approveGymRegistration(gymID)) {
 
@@ -99,7 +102,7 @@ public class GymFlipFitAdminMenu {
 									}
 									break;
 								case "Y":
-									System.out.println("Enter gymID:");
+									System.out.println("Enter gymID: ");
 									int gymID1 = in.nextInt();
 									if(admin.approveGymRegistration(gymID1)) {
 
@@ -116,8 +119,9 @@ public class GymFlipFitAdminMenu {
 					}
 					break;
 				case 4:
-					System.out.println("These are the pending gym registration requests: ");
-					admin.viewPendingGymRegistrations();
+					if(!admin.viewPendingGymRegistrations()) {
+						System.out.println("No pending gym registration requests");
+					}
 					System.out.println("\n");
 					break;
 				case 5:

@@ -27,8 +27,24 @@ public class GymFlipFitGymOwnerMenu {
 			GymOwnerServiceInterface gymOwner = new GymOwnerServiceOperation();
 			switch(option) {
 				case 1:
-					System.out.println("Enter gymOwner ID");
-					Integer gymOwnerID = in.nextInt();
+					System.out.println("Do you know your gym owner ID? (Y/N)");
+					String choice = in.next();
+					Integer gymOwnerID = 0;
+					switch(choice) {
+						case "Y":
+							System.out.println("Enter gym owner ID");
+							gymOwnerID = in.nextInt();
+							break;
+						case "N":
+							System.out.println("Enter your email ID");
+							String email = in.next();
+							gymOwnerID = gymOwner.getGymOwnerID(email);
+							break;
+						default:
+							System.out.println("Enter a valid choice");
+					}
+//					System.out.println("Enter gymOwner ID");
+//					Integer gymOwnerID = in.nextInt();
 					System.out.println("Enter gym name");
 					String gymName = in.next();
 					System.out.println("Enter gym address");
@@ -39,6 +55,23 @@ public class GymFlipFitGymOwnerMenu {
 					gym.setGymAddress(gymAddress);
 					if(gymOwner.registerGym(gym)) {
 						System.out.println("Successfully registered");
+					}
+					System.out.println("Choose slot from the below menu");
+					for (int j = 0; j < 24; j++) {
+						int startHour = j % 12;
+						int endHour = (j + 1) % 12;
+						
+						if (startHour == 0) {
+							startHour = 12;
+						}
+						
+						if (endHour == 0) {
+							endHour = 12;
+						}
+						
+						String slot1 = String.format("Slot %d - %d %s to %d %s", j, startHour, (j < 12 ? "AM" : "PM"), endHour, (j < 11 ? "AM" : "PM"));
+						
+						System.out.println(slot1);
 					}
 					System.out.println("Enter number of slots");
 					Integer numberOfSlots = in.nextInt();
@@ -57,8 +90,22 @@ public class GymFlipFitGymOwnerMenu {
 					}
 					break;
 				case 2:
-					System.out.println("Enter gym owner ID");
-					Integer gymOwnerID1 = in.nextInt();
+					System.out.println("Do you know your gym owner ID? (Y/N)");
+					String choice1 = in.next();
+					Integer gymOwnerID1 = 0;
+					switch(choice1) {
+						case "Y":
+							System.out.println("Enter gym owner ID");
+							gymOwnerID1 = in.nextInt();
+							break;
+						case "N":
+							System.out.println("Enter your email ID");
+							String email = in.next();
+							gymOwnerID1 = gymOwner.getGymOwnerID(email);
+							break;
+						default:
+							System.out.println("Enter a valid choice");
+					}
 					gymOwner.viewMyGyms(gymOwnerID1);
 					break;
 				case 3:

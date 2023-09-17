@@ -9,7 +9,7 @@ import com.flipkart.dao.AdminDAOInterface;
 public class AdminServiceOperation implements AdminServiceInterface{
 	AdminDAOInterface dao;
 	public AdminServiceOperation(){
-		dao  = new AdminDAOImplementation();
+		dao = new AdminDAOImplementation();
 
 	}
 
@@ -27,9 +27,9 @@ public class AdminServiceOperation implements AdminServiceInterface{
 	}
 
 	@Override
-	public void viewPendingGymOwnerRequests() {
+	public boolean viewPendingGymOwnerRequests() {
 		// TODO Auto-generated method stub
-		dao.queryGymOwnerDB();
+		return dao.queryGymOwnerDB();
 		
 	}
 
@@ -47,9 +47,9 @@ public class AdminServiceOperation implements AdminServiceInterface{
 	}
 
 	@Override
-	public void viewPendingGymRegistrations() {
+	public boolean viewPendingGymRegistrations() {
 		// TODO Auto-generated method stub
-		dao.queryGymDB();
+		return dao.queryGymDB();
 		
 	}
 	

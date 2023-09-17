@@ -14,4 +14,5 @@ public interface GymOwnerServiceInterface {
 	public void viewMyGyms(Integer gymOwnerID);
 	public Integer fetchGymID(Integer gymOwnerID, String gymName, String gymAddress);
 	public void addSlots(SlotCatalogDetails slot);
+	public Integer getGymOwnerID(String email);
 }

@@ -14,7 +14,6 @@ public class CustomerServiceOperation implements CustomerServiceInterface{
 
 	public CustomerServiceOperation() {
 		dao = new CustomerDAOImplementation();
-		System.out.println("Created a new dao object");
 	}
 
 	@Override

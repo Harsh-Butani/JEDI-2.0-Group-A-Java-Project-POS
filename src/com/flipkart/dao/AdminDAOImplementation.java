@@ -78,7 +78,7 @@ public class AdminDAOImplementation implements AdminDAOInterface{
 	}
 
 	@Override
-	public void queryGymOwnerDB() {
+	public boolean queryGymOwnerDB() {
 		// TODO Auto-generated method stub
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -87,14 +87,21 @@ public class AdminDAOImplementation implements AdminDAOInterface{
 			conn = DatabaseConnector.getConnection();
 			stmt = conn.prepareStatement(SQLConstants.VIEW_ALL_PENDING_GYM_OWNER_REQUEST_QUERY);
 			ResultSet rs = stmt.executeQuery();
+			boolean flag = false;
 			while(rs.next()){
+				if(!flag) {
+					System.out.println("These are the pending requests, choose one to approve\n");
+				}
+				flag = true;
 				String gymOwnerID = rs.getString("GymOwnerID");
 				String gymOwnerName = rs.getString("name");
 				String gymOwnerAddress = rs.getString("address");
-				System.out.println("GymOwnerID: " + gymOwnerID + ", GymOwnerName: " + gymOwnerName + "gymOwnerAddress: " + gymOwnerAddress);
+				System.out.println("GymOwnerID: " + gymOwnerID + ", GymOwnerName: " + gymOwnerName + ", gymOwnerAddress: " + gymOwnerAddress);
 			}
+			return flag;
 		} catch(Exception e) {
 			System.out.println(e);
+			return false;
 		}
 		
 	}
@@ -141,7 +148,7 @@ public class AdminDAOImplementation implements AdminDAOInterface{
 	}
 
 	@Override
-	public void queryGymDB() {
+	public boolean queryGymDB() {
 		// TODO Auto-generated method stub
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -150,17 +157,23 @@ public class AdminDAOImplementation implements AdminDAOInterface{
 			conn = DatabaseConnector.getConnection();
 			stmt = conn.prepareStatement(SQLConstants.VIEW_ALL_PENDING_GYM_REGISTRATION_REQUEST_QUERY);
 			ResultSet rs = stmt.executeQuery();
-
+			boolean flag = false;
 				while (rs.next()) {
+					if(!flag) {
+						System.out.println("These are the pending requests, choose one to approve\n");
+					}
+					flag = true;
 					String gymID = rs.getString("GymID");
 					String gymOwnerID = rs.getString("GymOwnerID");
 					String gymName = rs.getString("gymName");
 					String gymAddress = rs.getString("gymAddress");
-					System.out.println("GymID: " + gymID + "GymOwnerID: " + gymOwnerID + ", GymName: " + gymName + "gymAddress: " + gymAddress);
+					System.out.println("GymID: " + gymID + ", GymOwnerID: " + gymOwnerID + ", GymName: " + gymName + ", GymAddress: " + gymAddress);
 				}
+				return flag;
 
 		} catch(Exception e) {
 			System.out.println(e);
+			return false;
 		}
 		
 	}
