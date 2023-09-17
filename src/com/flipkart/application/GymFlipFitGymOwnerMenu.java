@@ -106,7 +106,9 @@ public class GymFlipFitGymOwnerMenu {
 						default:
 							System.out.println("Enter a valid choice");
 					}
-					gymOwner.viewMyGyms(gymOwnerID1);
+					if(!gymOwner.viewMyGyms(gymOwnerID1)) {
+						System.out.println("No gyms registered yet (Not approved by Admin if registration requests sent)");
+					}
 					break;
 				case 3:
 					return;

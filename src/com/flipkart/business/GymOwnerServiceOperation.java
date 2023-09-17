@@ -25,9 +25,9 @@ public class GymOwnerServiceOperation implements GymOwnerServiceInterface{
 	}
 
 	@Override
-	public void viewMyGyms(Integer gymOwnerID) {
+	public boolean viewMyGyms(Integer gymOwnerID) {
 		// TODO Auto-generated method stub
-		dao.queryGymDB(gymOwnerID);
+		return dao.queryGymDB(gymOwnerID);
 	}
 	
 	public Integer fetchGymID(Integer gymOwnerID, String gymName, String gymAddress) {

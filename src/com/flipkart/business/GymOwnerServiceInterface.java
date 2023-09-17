@@ -11,7 +11,7 @@ import com.flipkart.bean.SlotCatalogDetails;
  */
 public interface GymOwnerServiceInterface {
 	public boolean registerGym(GymDetails gym);
-	public void viewMyGyms(Integer gymOwnerID);
+	public boolean viewMyGyms(Integer gymOwnerID);
 	public Integer fetchGymID(Integer gymOwnerID, String gymName, String gymAddress);
 	public void addSlots(SlotCatalogDetails slot);
 	public Integer getGymOwnerID(String email);

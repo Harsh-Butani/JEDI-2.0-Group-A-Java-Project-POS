@@ -36,7 +36,7 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface{
 	}
 
 	@Override
-	public void queryGymDB(Integer gymOwnerID) {
+	public boolean queryGymDB(Integer gymOwnerID) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		try {
@@ -44,15 +44,19 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface{
 			stmt = conn.prepareStatement(SQLConstants.QUERY_GYM_DB_FOR_GYMOWNER);
 			stmt.setInt(1, gymOwnerID);
 			ResultSet rs = stmt.executeQuery();
+			boolean flag = false;
 			while(rs.next()) {
+				flag = true;
 				Integer gymID = rs.getInt("GymID");
 			    Integer approvalStatus = rs.getInt("ApprovalStatus");
 			    String gymName = rs.getString("gymName");
 			    String gymAddress = rs.getString("gymAddress");
 			    System.out.println("gymID: " + gymID + " approvalStatus: " + approvalStatus + " gymName: " + gymName + " gymAddress: " + gymAddress);
 			}
+			return flag;
 		} catch(Exception e) {
 			System.out.println(e);
+			return false;
 		}
 		
 	}

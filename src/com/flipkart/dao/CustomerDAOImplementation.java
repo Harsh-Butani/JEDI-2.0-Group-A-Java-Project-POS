@@ -16,21 +16,25 @@ import com.flipkart.utils.DatabaseConnector;
 public class CustomerDAOImplementation implements CustomerDAOInterface {
 
 	@Override
-	public void queryAllGymDB() {
+	public boolean queryAllGymDB() {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		try {
 			conn = DatabaseConnector.getConnection();
 			stmt = conn.prepareStatement(SQLConstants.VIEW_GYMS_QUERY);
 			ResultSet rs = stmt.executeQuery();
+			boolean flag = false;
 			while(rs.next()){
+				flag = true;
 				String gymID = rs.getString("gymID");
 				String gymName = rs.getString("gymName");
 				String gymAddress = rs.getString("gymAddress");
 				System.out.println("GymID: " + gymID + ", GymName: " + gymName + ", GymAddress: " + gymAddress);
 			}
+			return flag;
 		} catch(Exception e) {
 			System.out.println(e);
+			return false;
 		}
 	}
 
@@ -156,7 +160,7 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 	}
 
 	@Override
-	public void queryBookingListDB(Integer userID) {
+	public boolean queryBookingListDB(Integer userID) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		try {
@@ -164,14 +168,18 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 			stmt = conn.prepareStatement(SQLConstants.VIEW_ALL_BOOKINGS_OF_A_USER);
 			stmt.setInt(1,userID);
 			ResultSet rs = stmt.executeQuery();
+			boolean flag = false;
 			while(rs.next()){
+				flag = true;
 				Integer ruserID = rs.getInt("userID");
 				String gymID = rs.getString("gymID");
 				String slotNumber = rs.getString("slotNumber");
 				System.out.println("userID: " + ruserID + ", GymID: " + gymID + ", slotNumber: " + slotNumber);
 			}
+			return flag;
 		} catch(Exception e) {
 			System.out.println(e);
+			return false;
 		}
 	}
 
@@ -195,7 +203,7 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 	}
 
 	@Override
-	public void querySeatsSlotDB(Integer gymID) {
+	public boolean querySeatsSlotDB(Integer gymID) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		try {
@@ -203,13 +211,17 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 			stmt = conn.prepareStatement(SQLConstants.VIEW_ALL_AVAILABLE_SLOTS_OF_A_PARTICULAR_GYM);
 			stmt.setInt(1,gymID);
 			ResultSet rs = stmt.executeQuery();
+			boolean flag = false;
 			while(rs.next()){
+				flag = true;
 				Integer slotNumber = rs.getInt("slotNumber");
 				Integer availableSeats = rs.getInt("availableSeats");
 				System.out.println("slotNumber: " + slotNumber + ", availableSeats: " + availableSeats);
 			}
+			return flag;
 		} catch(Exception e) {
 			System.out.println(e);
+			return false;
 		}
 	}
 

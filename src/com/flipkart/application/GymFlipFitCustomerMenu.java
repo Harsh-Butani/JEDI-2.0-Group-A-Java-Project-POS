@@ -49,7 +49,9 @@ public class GymFlipFitCustomerMenu {
 			int option = in.nextInt();
 			switch(option) {
 				case 1:
-					customer.viewGyms();
+					if(!customer.viewGyms()) {
+						System.out.println("No gyms currently available");
+					}
 					break;
 				case 2:
 					System.out.println("Enter gym ID");
@@ -79,7 +81,9 @@ public class GymFlipFitCustomerMenu {
 					}
 					break;
 				case 4:
-					customer.viewAllBookings(UserID);
+					if(!customer.viewAllBookings(UserID)) {
+						System.out.println("You have no bookings");
+					}
 					break;
 				case 5:
 					System.out.println("Enter Gym ID: ");
@@ -92,7 +96,9 @@ public class GymFlipFitCustomerMenu {
 				case 7:
 					System.out.println("Enter Gym ID: ");
 					gymID = in.nextInt();
-					customer.checkAvailableSlots(gymID);
+					if(!customer.checkAvailableSlots(gymID)) {
+						System.out.println("No slots available");
+					}
 					break;
 				case 8:
 					return;

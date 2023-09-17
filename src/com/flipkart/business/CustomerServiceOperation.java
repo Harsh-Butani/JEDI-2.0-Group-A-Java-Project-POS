@@ -17,8 +17,8 @@ public class CustomerServiceOperation implements CustomerServiceInterface{
 	}
 
 	@Override
-	public void viewGyms() {
-		dao.queryAllGymDB();
+	public boolean viewGyms() {
+		return dao.queryAllGymDB();
 	}
 
 	@Override
@@ -57,8 +57,8 @@ public class CustomerServiceOperation implements CustomerServiceInterface{
 	}
 
 	@Override
-	public void viewAllBookings(Integer userID) {
-		dao.queryBookingListDB(userID);
+	public boolean viewAllBookings(Integer userID) {
+		return dao.queryBookingListDB(userID);
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class CustomerServiceOperation implements CustomerServiceInterface{
 //	}
 
 	@Override
-	public void checkAvailableSlots(Integer gymID) {
-		dao.querySeatsSlotDB(gymID);
+	public boolean checkAvailableSlots(Integer gymID) {
+		return dao.querySeatsSlotDB(gymID);
 	}
 }
