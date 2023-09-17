@@ -7,12 +7,7 @@ package com.flipkart.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLOutput;
-
-import com.flipkart.bean.BookingList;
-import com.flipkart.bean.GymDetails;
-import com.flipkart.bean.SlotCatalogDetails;
-import com.flipkart.bean.User;
+import com.flipkart.constants.SQLConstants;
 import com.flipkart.utils.DatabaseConnector;
 
 /**
@@ -25,12 +20,9 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		try {
-
 			conn = DatabaseConnector.getConnection();
-
-			String sql = "select GymID, GymName, GymAddress from gym";
-			stmt = conn.prepareStatement(sql);
-			ResultSet rs = stmt.executeQuery(sql);
+			stmt = conn.prepareStatement(SQLConstants.VIEW_GYMS_QUERY);
+			ResultSet rs = stmt.executeQuery();
 			while(rs.next()){
 				String gymID = rs.getString("gymID");
 				String gymName = rs.getString("gymName");
@@ -198,6 +190,25 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 				return true;
 			}
 			return false;
+		} catch(Exception e) {
+			System.out.println(e);
+			return false;
+		}
+	}
+	
+	@Override 
+	public Boolean slotFull(Integer gymID, Integer slotNumber) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		try {
+			conn = DatabaseConnector.getConnection();
+			String sql = "select availableSeats from SlotCatalog where gymID = " + gymID + " and slotNumber = " + slotNumber + " and availableSeats > 0";
+			stmt = conn.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery(sql);
+			if(rs.next()){
+				return false;
+			}
+			return true;
 		} catch(Exception e) {
 			System.out.println(e);
 			return false;

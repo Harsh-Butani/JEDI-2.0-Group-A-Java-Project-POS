@@ -9,6 +9,8 @@ import java.util.Scanner;
 
 import com.flipkart.business.CustomerServiceInterface;
 import com.flipkart.business.CustomerServiceOperation;
+import com.flipkart.exception.SlotFullException;
+import com.flipkart.exception.SlotNotBookedException;
 
 /**
  * 
@@ -54,14 +56,27 @@ public class GymFlipFitCustomerMenu {
 					Integer gymID = in.nextInt();
 					System.out.println("Enter slot number");
 					Integer slotnumber = in.nextInt();
-					customer.bookSlot(gymID, slotnumber, UserID);
+					try {
+						customer.bookSlot(gymID, slotnumber, UserID);
+					}
+					catch(SlotFullException e) {
+						System.out.println("Gym with ID " + e.getGymID() + " and slot number " + e.getSlotNumber() + " has no available seats");
+					}
+					catch(SlotNotBookedException e) {
+						System.out.println("Gym with ID " + e.getGymID() + " and slot number " + e.getSlotNumber() + " wasn't booked");
+					}
 					break;
 				case 3:
 					System.out.println("Enter gym ID");
 					gymID = in.nextInt();
 					System.out.println("Enter slot number");
 					slotnumber = in.nextInt();
-					customer.cancelBookedSlots(gymID, slotnumber, UserID);
+					try {
+						customer.cancelBookedSlots(gymID, slotnumber, UserID);
+					}
+					catch(SlotNotBookedException e) {
+						System.out.println("Gym with ID " + e.getGymID() + " and slot number " + e.getSlotNumber() + " wasn't booked");
+					}
 					break;
 				case 4:
 					customer.viewAllBookings(UserID);

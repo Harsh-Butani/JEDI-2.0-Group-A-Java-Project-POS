@@ -1,25 +1,22 @@
 package com.flipkart.application;
-import java.util.ArrayList;
-import java.util.List;
+
 /**
  * @author kshitij.gupta1
  */
 import java.util.Scanner;
 
 import com.flipkart.business.VerificationServiceOperation;
-import com.flipkart.dao.CustomerDAOImplementation;
-import com.flipkart.dao.UserDAOImplementation;
+import com.flipkart.exception.AlreadyRegisteredException;
+import com.flipkart.exception.UserNotRegisteredException;
 import com.flipkart.bean.User;
 import com.flipkart.business.VerificationServiceInterface;
-import com.flipkart.business.CustomerServiceOperation;
 import com.flipkart.business.UserServiceInterface;
 import com.flipkart.business.UserServiceOperation;
 
 public class GymFlipFitApplication {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws UserNotRegisteredException {
 		// TODO Auto-generated
-		List<User> userDetails = new ArrayList<User>();
         System.out.println("Welcome to FlipFit Application for Slot Booking!");
         Scanner in = new Scanner(System.in);
         while(true) {
@@ -30,7 +27,6 @@ public class GymFlipFitApplication {
         	System.out.println("Press 4 to Exit");
         	
         	int option = in.nextInt();
-        	String emailID, password,role;
         	boolean flag = false;
         	
 			VerificationServiceInterface verifier = new VerificationServiceOperation();
@@ -45,20 +41,25 @@ public class GymFlipFitApplication {
         			System.out.println("Enter your role (Customer/GymOwner/Admin)");
         			userLogin.setRole(in.next());
         			
-        			if(verifier.verifyCredentials(userLogin)) {
-        				System.out.println("Successfully logged in");
-        				if(userLogin.getRole().equals("Customer")) {
-            				GymFlipFitCustomerMenu.customerMenu(in);
-            			}
-            			else if(userLogin.getRole().equals("GymOwner")) {
-            				GymFlipFitGymOwnerMenu.gymOwnerMenu(in);
-            			}
-            			else {
-            				GymFlipFitAdminMenu.adminMenu(in);
-            			}
+        			try {
+	        			if(verifier.verifyCredentials(userLogin)) {
+	        				System.out.println("Successfully logged in");
+	        				if(userLogin.getRole().equals("Customer")) {
+	            				GymFlipFitCustomerMenu.customerMenu(in);
+	            			}
+	            			else if(userLogin.getRole().equals("GymOwner")) {
+	            				GymFlipFitGymOwnerMenu.gymOwnerMenu(in);
+	            			}
+	            			else {
+	            				GymFlipFitAdminMenu.adminMenu(in);
+	            			}
+	        			}
+	        			else {
+	        				System.out.println("Incorrect/Invalid credentials");
+	        			}
         			}
-        			else {
-        				System.out.println("Incorrect/Invalid credentials");
+        			catch(UserNotRegisteredException e) {
+        				System.out.println("User with email ID " + e.getEmail() + " and role " + e.getRole() + " not registered");
         			}
         			break;
         		case 2:
@@ -69,8 +70,13 @@ public class GymFlipFitApplication {
         			user.setPassword(in.next());
         			System.out.println("Enter your role (Customer/GymOwner/Admin)");
         			user.setRole(in.next());
-        			userService.registerUser(user);
-        			System.out.println("Registration complete");
+        			try {
+        				userService.registerUser(user);
+        				System.out.println("Registration complete");
+        			}
+        			catch(AlreadyRegisteredException e) {
+        				System.out.println("User with email ID " + e.getEmail() + " and role " + e.getRole() + " already exists");
+        			}
         			break;
         		case 3:
         			user = new User();

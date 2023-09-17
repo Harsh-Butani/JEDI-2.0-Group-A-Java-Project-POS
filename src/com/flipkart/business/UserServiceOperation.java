@@ -3,9 +3,9 @@
  */
 package com.flipkart.business;
 
-import java.sql.ResultSet;
 
 import com.flipkart.bean.User;
+import com.flipkart.exception.AlreadyRegisteredException;
 import com.flipkart.dao.UserDAOImplementation;
 import com.flipkart.dao.UserDAOInterface;
 
@@ -19,8 +19,11 @@ public class UserServiceOperation implements UserServiceInterface{
 		userDAO = new UserDAOImplementation();
 	}
 	@Override
-	public void registerUser(User user) {
+	public void registerUser(User user) throws AlreadyRegisteredException {
 		// TODO Auto-generated method stub
+		if(userDAO.queryUserDB(user)) {
+			throw new AlreadyRegisteredException(user.getEmailID(), user.getRole());
+		}
 		userDAO.insertUserDB(user);
 	}
 	

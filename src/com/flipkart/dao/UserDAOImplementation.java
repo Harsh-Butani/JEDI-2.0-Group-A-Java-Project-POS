@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import com.flipkart.bean.User;
+import com.flipkart.constants.SQLConstants;
 import com.flipkart.utils.DatabaseConnector;
 
 /**
@@ -22,8 +23,7 @@ public class UserDAOImplementation implements UserDAOInterface{
 		PreparedStatement stmt = null;
 		try {
 			conn = DatabaseConnector.getConnection();
-			String sql = "insert into User (email,password,role) values(?,?,?)";
-			stmt = conn.prepareStatement(sql);
+			stmt = conn.prepareStatement(SQLConstants.REGISTER_USER_QUERY);
 			stmt.setString(1, user.getEmailID());
 			stmt.setString(2, user.getPassword());
 			stmt.setString(3, user.getRole());
@@ -60,28 +60,46 @@ public class UserDAOImplementation implements UserDAOInterface{
 		PreparedStatement stmt = null;
 		try {
 			conn = DatabaseConnector.getConnection();
-			String sql = "SELECT * FROM User";
+			String sql = "SELECT * FROM User where email = " + user.getEmailID() + " and role = " + user.getRole() + " and password = " + user.getPassword();
 			stmt = conn.prepareStatement(sql);
-		     ResultSet rs = stmt.executeQuery(sql);
-		     User currUser = null;
-		      //STEP 5: Extract data from result set
-		      while(rs.next()){
-		         //Retrieve by column name
-		         String email = rs.getString("email");
-		         String password = rs.getString("password");
-		         String role = rs.getString("role");
-		         if(email.equals(user.getEmailID()) && password.equals(user.getPassword()) && role.equals(user.getRole())){
-		        	 currUser = new User();
-			         currUser.setEmailID(email);
-			         currUser.setPassword(password);
-			         currUser.setRole(role);
-		         }
-		      }
-		      return currUser;
+		    ResultSet rs = stmt.executeQuery(sql);
+		    User currUser = null;
+		    while(rs.next()){
+		        String email = rs.getString("email");
+		        String password = rs.getString("password");
+		        String role = rs.getString("role");
+		        if(email.equals(user.getEmailID()) && password.equals(user.getPassword()) && role.equals(user.getRole())){
+		        	currUser = new User();
+			        currUser.setEmailID(email);
+			        currUser.setPassword(password);
+			        currUser.setRole(role);
+			        return currUser;
+		        }
+		    }
+		    return null;
 		} catch (Exception e) {
 			System.out.println(e);
 			return null;
 		}
 	}
 
+	@Override
+	public Boolean queryUserDB(User user) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		try {
+			conn = DatabaseConnector.getConnection();
+			String sql = "SELECT * FROM User where email = " + user.getEmailID() + " and role = " + user.getRole();
+			stmt = conn.prepareStatement(sql);
+		    ResultSet rs = stmt.executeQuery(sql);
+		      if(rs.next()){
+		         return true;
+		      }
+		      return false;
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		}
+	}
+	
 }

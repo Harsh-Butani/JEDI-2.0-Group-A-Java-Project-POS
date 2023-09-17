@@ -1,9 +1,9 @@
 package com.flipkart.business;
 
 import com.flipkart.bean.User;
-import com.flipkart.dao.CustomerDAOImplementation;
 import com.flipkart.dao.UserDAOImplementation;
 import com.flipkart.dao.UserDAOInterface;
+import com.flipkart.exception.UserNotRegisteredException;
 
 /**
  * @author kshitij.gupta1
@@ -14,12 +14,12 @@ public class VerificationServiceOperation implements VerificationServiceInterfac
 		userDAO = new UserDAOImplementation();
 	}
 	@Override
-	public boolean verifyCredentials(User user) {
+	public boolean verifyCredentials(User user) throws UserNotRegisteredException {
 		User isRegisteredUser = userDAO.getUserDB(user);
 		if(isRegisteredUser!=null) {
 			return true;
 		}
-		return false;
+		throw new UserNotRegisteredException(user.getEmailID(), user.getRole());
 	}
 
 }

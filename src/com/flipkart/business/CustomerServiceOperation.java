@@ -2,16 +2,13 @@ package com.flipkart.business;
 /**
  * @author kshitij.gupta1
  */
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
 
-import com.flipkart.bean.User;
 import com.flipkart.dao.CustomerDAOImplementation;
 import com.flipkart.dao.CustomerDAOInterface;
+import com.flipkart.exception.SlotFullException;
+import com.flipkart.exception.SlotNotBookedException;
 
-import java.sql.SQLException;
-import java.util.*;
+
 public class CustomerServiceOperation implements CustomerServiceInterface{
 	CustomerDAOInterface dao;
 
@@ -26,9 +23,16 @@ public class CustomerServiceOperation implements CustomerServiceInterface{
 	}
 
 	@Override
-	public boolean bookSlot(Integer gymID, Integer slotNumber, Integer userID) {
+	public boolean bookSlot(Integer gymID, Integer slotNumber, Integer userID) throws SlotFullException {
+		if(dao.slotFull(gymID, slotNumber)) {
+			throw new SlotFullException(gymID, slotNumber);
+		}
 		if(dao.queryBookingListDB(userID, slotNumber)) {
-			cancelBookedSlots(gymID, slotNumber, userID);
+			try {
+				cancelBookedSlots(gymID, slotNumber, userID);
+			} catch (SlotNotBookedException e) {
+				e.printStackTrace();
+			}
 		}
 		dao.decreaseSeatsSlotDB(gymID, slotNumber);
 		dao.addBookingListDB(userID, gymID, slotNumber);
@@ -36,10 +40,9 @@ public class CustomerServiceOperation implements CustomerServiceInterface{
 	}
 
 	@Override
-	public boolean cancelBookedSlots(Integer gymID, Integer slotNumber, Integer userID) {
+	public boolean cancelBookedSlots(Integer gymID, Integer slotNumber, Integer userID) throws SlotNotBookedException {
 		if(!dao.queryBookingListDB(userID, slotNumber, gymID)) {
-			System.out.println("There exists no such booking");
-			return false;
+			throw new SlotNotBookedException(gymID, slotNumber);
 		}
 		dao.increaseSeatsSlotDB(gymID, slotNumber);
 		dao.deleteBookingListDB(userID, slotNumber);

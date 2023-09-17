@@ -3,11 +3,6 @@
  */
 package com.flipkart.dao;
 
-import com.flipkart.bean.BookingList;
-import com.flipkart.bean.GymDetails;
-import com.flipkart.bean.User;
-import com.flipkart.bean.SlotCatalogDetails;
-
 /**
  *
  */
@@ -32,4 +27,5 @@ public interface CustomerDAOInterface {
 	public void queryGymDB(Integer gymID);
 	public void querySeatsSlotDB(Integer GymID);
 	public Boolean queryBookingListDB(Integer UserID, Integer slotNumber, Integer gymID);
+	public Boolean slotFull(Integer gymID, Integer slotNumber);
 }
