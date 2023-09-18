@@ -5,7 +5,7 @@ package com.flipkart.bean;
 public class GymOwner {
 	private String name;
 	private String address;
-	private int IDProof;
+	private String IDProof;
 	private int gymOwnerID;
 
 	public String getEmailID() {
@@ -40,10 +40,10 @@ public class GymOwner {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public int getIDProof() {
+	public String getIDProof() {
 		return IDProof;
 	}
-	public void setIDProof(int iDProof) {
+	public void setIDProof(String iDProof) {
 		IDProof = iDProof;
 	}
 	public int getGymOwnerID() {

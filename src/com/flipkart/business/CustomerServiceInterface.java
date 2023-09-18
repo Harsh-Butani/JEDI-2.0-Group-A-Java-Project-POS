@@ -84,5 +84,12 @@ public interface CustomerServiceInterface {
 	 * @throws SlotNotBookedException
 	 */
 	public int getUserID(String email, String password, String role);
+	
+	/**
+	 * Method for customer to view their profile
+	 * @param userID userID of the customer
+	 * @throws SlotNotBookedException
+	 */
+	public void viewProfile(Integer userID);
 
 }

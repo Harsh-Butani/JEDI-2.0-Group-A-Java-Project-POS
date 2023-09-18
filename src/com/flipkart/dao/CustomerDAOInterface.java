@@ -114,4 +114,12 @@ public interface CustomerDAOInterface {
 	 * @return UserID associated with details in parameters
 	 */
 	public Integer queryUserDBForID(String email, String password, String role);
+	
+	
+	/**
+	 * Dao Method Used to query the User DB to fetch profile
+	 * @param userID
+	 * @return Displays profile of user whose userID is provided
+	 */
+	public void queryProfileUserDB(Integer userID);
 }

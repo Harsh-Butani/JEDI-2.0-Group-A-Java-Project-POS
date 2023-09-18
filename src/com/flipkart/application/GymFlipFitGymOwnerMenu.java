@@ -21,7 +21,8 @@ public class GymFlipFitGymOwnerMenu {
 			System.out.println("----Gym Owner Menu----");
 			System.out.println("Press 1 to register gym");
 			System.out.println("Press 2 to view your gyms");
-			System.out.println("Press 3 to exit");
+			System.out.println("Press 3 to view profile");
+			System.out.println("Press 4 to exit");
 			
 			int option = in.nextInt();
 			GymOwnerServiceInterface gymOwner = new GymOwnerServiceOperation();
@@ -111,6 +112,25 @@ public class GymFlipFitGymOwnerMenu {
 					}
 					break;
 				case 3:
+					System.out.println("Do you know your gym owner ID? (Y/N)");
+					String choice2 = in.next();
+					Integer gymOwnerID2 = 0;
+					switch(choice2) {
+						case "Y":
+							System.out.println("Enter gym owner ID");
+							gymOwnerID2 = in.nextInt();
+							break;
+						case "N":
+							System.out.println("Enter your email ID");
+							String email = in.next();
+							gymOwnerID2 = gymOwner.getGymOwnerID(email);
+							break;
+						default:
+							System.out.println("Enter a valid choice");
+					}
+					gymOwner.viewProfile(gymOwnerID2);
+					break;
+				case 4:
 					return;
 				default:
 					System.out.println("Enter a valid option");

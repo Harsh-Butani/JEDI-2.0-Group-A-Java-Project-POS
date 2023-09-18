@@ -42,4 +42,10 @@ public interface GymOwnerServiceInterface {
 	 * @param email emailID of GymOwner
 	 */
 	public Integer getGymOwnerID(String email);
+	
+	/**
+	 * Method for GymOwner to fetch their profile
+	 * @param gymOwnerID gymOwnerID of GymOwner
+	 */
+	public void viewProfile(Integer gymOwnerID);
 }

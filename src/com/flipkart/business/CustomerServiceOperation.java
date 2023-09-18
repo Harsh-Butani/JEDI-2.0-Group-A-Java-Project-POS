@@ -83,4 +83,9 @@ public class CustomerServiceOperation implements CustomerServiceInterface{
 	public boolean checkAvailableSlots(Integer gymID) { // Used to check available slots for the given gym
 		return dao.querySeatsSlotDB(gymID);
 	}
+	
+	@Override
+	public void viewProfile(Integer userID) {
+		dao.queryProfileUserDB(userID);
+	}
 }

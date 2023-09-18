@@ -103,7 +103,7 @@ public class GymFlipFitApplication {
 							System.out.println("Enter your Address");
 							gymOwner.setAddress(in.next());
 							System.out.println("Enter your IDProof(Aadhar number)");
-							gymOwner.setIDProof(in.nextInt());
+							gymOwner.setIDProof(in.next());
 							try {
 								if(!GymOwnerValidation.checkAadhar(gymOwner.getIDProof())) {
 									continue;

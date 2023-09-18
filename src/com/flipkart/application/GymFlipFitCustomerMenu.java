@@ -23,7 +23,6 @@ public class GymFlipFitCustomerMenu {
 	public static void customerMenu(Scanner in) {
 
 		CustomerServiceInterface customer = new CustomerServiceOperation();
-		//CustomerServiceOperation.init();
 		System.out.println("Do you know your UserID? Enter Y for yes and N for no");
 		String userChoice = in.next();
 		Integer UserID = null;
@@ -69,7 +68,8 @@ public class GymFlipFitCustomerMenu {
 			System.out.println("Press 4 to view all bookings");
 			System.out.println("Press 5 to view gym info");
 			//System.out.println("Press 6 to check booking list");
-			System.out.println("Press 7 to check available slots");
+			System.out.println("Press 6 to check available slots");
+			System.out.println("Press 7 to check profile");
 			System.out.println("Press 8 to exit");
 			
 			int option = in.nextInt();
@@ -116,15 +116,18 @@ public class GymFlipFitCustomerMenu {
 					gymID = in.nextInt();
 					customer.getGymInfo(gymID);
 					break;
+//				case 6:
+//					//customer.checkBookingList();
+//					break;
 				case 6:
-					//customer.checkBookingList();
-					break;
-				case 7:
 					System.out.println("Enter Gym ID: ");
 					gymID = in.nextInt();
 					if(!customer.checkAvailableSlots(gymID)) {
 						System.out.println("No slots available");
 					}
+					break;
+				case 7:
+					customer.viewProfile(UserID);
 					break;
 				case 8:
 					return;

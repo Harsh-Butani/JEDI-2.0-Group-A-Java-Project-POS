@@ -92,7 +92,7 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface{
 			stmt = conn.prepareStatement(SQLConstants.INSERT_INTO_GYM_OWNER_DB);
 			stmt.setString(1,gymOwner.getName());
 			stmt.setString(2,gymOwner.getAddress());
-			stmt.setInt(3,gymOwner.getIDProof());
+			stmt.setString(3,gymOwner.getIDProof());
 			stmt.setInt(4,0);
 			stmt.setString(5,gymOwner.getEmailID());
 			stmt.setString(6, gymOwner.getPassword());
@@ -140,6 +140,29 @@ public class GymOwnerDAOImplementation implements GymOwnerDAOInterface{
 		} catch(Exception e) {
 			System.out.println(e);
 			return -1;
+		}
+	}
+	
+	@Override
+	public void queryGymOwnerDB(Integer gymOwnerID) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		try {
+
+			conn = DatabaseConnector.getConnection();
+			stmt = conn.prepareStatement(SQLConstants.QUERY_PROFILE_GYMOWNER_DB);
+			stmt.setInt(1, gymOwnerID);
+			ResultSet rs = stmt.executeQuery();
+			if(rs.next()) {
+				String email = rs.getString("emailID");
+				String address = rs.getString("Address");
+				String name = rs.getString("name");
+				System.out.println("GymOwnerEmail: " + email + " Name: " + name + 
+						" Address: " + address + "GymOwnerID: " + gymOwnerID);
+			}
+
+		} catch(Exception e) {
+			System.out.println(e);
 		}
 	}
 

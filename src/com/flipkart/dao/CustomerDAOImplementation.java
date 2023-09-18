@@ -291,114 +291,25 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 			return false;
 		}
 	}
-//	DatabaseConnector dbc;
-//
-//	public void init() {
-//		dbc = new DatabaseConnector();
-//		init();
-//	}
-//
-//	@Override
-//	public void insertUserDB(User user) {
-//		// TODO Auto-generated method stub
-//		try {
-//
-//			String sql = "insert into User values(?,?,?,?)";
-//			stmt = conn.prepareStatement(sql);
-//			stmt.setInt(1, user.getUserID());
-//			stmt.setString(2, user.getEmailID());
-//			stmt.setString(3, user.getPassword());
-//			stmt.setString(4, user.getRole());
-//			stmt.executeUpdate();
-//		} catch (Exception e) {
-//			System.out.println(e);
-//		}
-//	}
-//
-//	public void updateUserDB(User user, String password) {
-//		// TODO Auto-generated method stub
-//		try {
-//
-//			String sql = "update User set password=(?) where email=(?) and password=(?) and role=(?)";
-//			stmt = conn.prepareStatement(sql);
-//			stmt.setString(1, password);
-//			stmt.setString(2, user.getEmailID());
-//			stmt.setString(3, user.getPassword());
-//			stmt.setString(4, user.getRole());
-//			stmt.executeUpdate();
-//		} catch (Exception e) {
-//			System.out.println(e);
-//		}
-//	}
-//
-//	public User getUser(User user) {
-//		// TODO Auto-generated method stub
-//		try {
-//			String sql = "SELECT * FROM User";
-//			stmt = conn.prepareStatement(sql);
-//		     ResultSet rs = stmt.executeQuery(sql);
-//		     User currUser = null;
-//		      //STEP 5: Extract data from result set
-//		      while(rs.next()){
-//		         //Retrieve by column name
-//		         String email = rs.getString("email");
-//		         String password = rs.getString("password");
-//		         String role = rs.getString("role");
-//		         if(email.equals(user.getEmailID()) && password.equals(user.getPassword()) && role.equals(user.getRole())){
-//		        	 currUser = new User(false);
-//			         currUser.setEmailID(email);
-//			         currUser.setPassword(password);
-//			         currUser.setRole(role);
-//		         }
-//		      }
-//		      return currUser;
-//		} catch (Exception e) {
-//			System.out.println(e);
-//			return null;
-//		}
-//	}
-//
-//	@Override
-//	public void insertGymDB(GymDetails gym) {
-//		// TODO Auto-generated method stub
-//		try {
-//
-//
-//		} catch (Exception e) {
-//			System.out.println(e);
-//		}
-//	}
-//
-//	@Override
-//	public void insertBookingListDB(BookingList list) {
-//		// TODO Auto-generated method stub
-//		try {
-//
-////			String sql = "insert into User values(?,?)";
-////			stmt = conn.prepareStatement(sql);
-////			stmt.setString(1, user.getEmailID());
-////			stmt.setString(2, user.getPassword());
-////			stmt.executeUpdate();
-//		} catch (Exception e) {
-//			System.out.println(e);
-//		}
-//	}
-//
-//	@Override
-//	public void insertSlotCatalogDB(SlotCatalogDetails slot) {
-//		// TODO Auto-generated method stub
-//		try {
-//
-////			String sql = "insert into User values(?,?)";
-////			stmt = conn.prepareStatement(sql);
-////			stmt.setString(1, user.getEmailID());
-////			stmt.setString(2, user.getPassword());
-////			stmt.executeUpdate();
-//		} catch (Exception e) {
-//			System.out.println(e);
-//		}
-//	}
-
+	
+	@Override
+	public void queryProfileUserDB(Integer userID) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		try {
+			conn = DatabaseConnector.getConnection();
+			stmt = conn.prepareStatement(SQLConstants.QUERY_PROFILE_USER_DB);
+			stmt.setInt(1,userID);
+			ResultSet rs = stmt.executeQuery();
+			if(rs.next()){
+				String email = rs.getString("email");
+				String role = rs.getString("role");
+				System.out.println("UserID: " + userID + " email: " + email + " role: " + role);
+			}
+		} catch(Exception e) {
+			System.out.println(e);
+		}
+	}
 
 
 }

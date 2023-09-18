@@ -58,4 +58,11 @@ public interface GymOwnerDAOInterface {
 	 * @return gymOwnerID associated with details
 	 */
 	public Integer getIDFromGymOwnerDB(String email);
+	
+	/**
+	 * Dao method to view gym owner profile associated with gymOwnerID
+	 * @param gymOwnerID
+	 * @return Displays profile details of the gym owner
+	 */
+	public void queryGymOwnerDB(Integer gymOwnerID);
 }

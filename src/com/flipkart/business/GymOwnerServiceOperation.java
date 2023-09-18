@@ -41,4 +41,8 @@ public class GymOwnerServiceOperation implements GymOwnerServiceInterface{
 	public Integer getGymOwnerID(String email) { // Used to retrieve gym owner ID from his/her email
 		return dao.getIDFromGymOwnerDB(email);
 	}
+	
+	public void viewProfile(Integer gymOwnerID) {
+		dao.queryGymOwnerDB(gymOwnerID);
+	}
 }
