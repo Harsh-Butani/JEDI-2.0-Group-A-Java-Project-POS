@@ -13,7 +13,7 @@ import com.flipkart.dao.UserDAOImplementation;
 import com.flipkart.dao.UserDAOInterface;
 
 /**
- * 
+ * @author kshitij.gupta1
  */
 public class UserServiceOperation implements UserServiceInterface{
 
@@ -24,7 +24,7 @@ public class UserServiceOperation implements UserServiceInterface{
 		gymOwnerDAO = new GymOwnerDAOImplementation();
 	}
 	@Override
-	public void registerUser(User user) throws AlreadyRegisteredException {
+	public void registerUser(User user) throws AlreadyRegisteredException { // Used to register the passed user
 		// TODO Auto-generated method stub
 		if(userDAO.queryUserDB(user)) {
 			throw new AlreadyRegisteredException(user.getEmailID(), user.getRole());
@@ -33,7 +33,7 @@ public class UserServiceOperation implements UserServiceInterface{
 	}
 	
 	@Override
-	public void updateUser(User user, String password) {
+	public void updateUser(User user, String password) { // Used to update password of given user
 		// TODO Auto-generated method stub
 		userDAO.updateUserDB(user,password);
 	}
@@ -45,7 +45,7 @@ public class UserServiceOperation implements UserServiceInterface{
 //	}
 
 	@Override
-	public void registerGymOwner(GymOwner gymOwner) {
+	public void registerGymOwner(GymOwner gymOwner) { // Used to register given gym owner
 		gymOwnerDAO.insertGymOwnerDB(gymOwner);
 	}
 }

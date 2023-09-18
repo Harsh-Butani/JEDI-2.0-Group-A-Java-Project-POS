@@ -11,12 +11,12 @@ import com.flipkart.constants.SQLConstants;
 import com.flipkart.utils.DatabaseConnector;
 
 /**
- *
+ * @author kshitij.gupta1
  */
 public class CustomerDAOImplementation implements CustomerDAOInterface {
 
 	@Override
-	public boolean queryAllGymDB() {
+	public boolean queryAllGymDB() { // Used to Query all the approved gyms by Customer
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		try {
@@ -39,7 +39,7 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 	}
 
 	@Override
-	public Boolean queryBookingListDB(Integer UserID, Integer slotNumber) {
+	public Boolean queryBookingListDB(Integer UserID, Integer slotNumber) { //Used to Query Booking List to Fetch all the Bookings of User
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		try {
@@ -59,7 +59,7 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 	}
 
 	@Override
-	public Integer queryCancelBookingDB(Integer UserID, Integer slotNumber) {
+	public Integer queryCancelBookingDB(Integer UserID, Integer slotNumber) { //Used to Query Booking DB to fetch bookings for cancellation
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		try {
@@ -79,7 +79,7 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 	}
 
 	@Override
-	public Integer queryUserDBForID(String email, String password, String role) {
+	public Integer queryUserDBForID(String email, String password, String role) { //Used to query the User DB to fetch user ID if User doesn't know
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		try {
@@ -103,7 +103,7 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 	}
 
 	@Override
-	public void decreaseSeatsSlotDB(Integer gymID, Integer slotNumber) {
+	public void decreaseSeatsSlotDB(Integer gymID, Integer slotNumber) { //Decrease Seats in the Slot Db for particular Gym and its Slot
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		try {
@@ -129,7 +129,7 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 	}
 
 	@Override
-	public void addBookingListDB(Integer userID, Integer gymID, Integer slotNumber) {
+	public void addBookingListDB(Integer userID, Integer gymID, Integer slotNumber) { //Add Booking to Booking DB
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		try {
@@ -145,7 +145,7 @@ public class CustomerDAOImplementation implements CustomerDAOInterface {
 	}
 
 	@Override
-	public void increaseSeatsSlotDB(Integer gymID, Integer slotNumber) {
+	public void increaseSeatsSlotDB(Integer gymID, Integer slotNumber) { //Increase Slots of a gym's slot after cancellation
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		try {

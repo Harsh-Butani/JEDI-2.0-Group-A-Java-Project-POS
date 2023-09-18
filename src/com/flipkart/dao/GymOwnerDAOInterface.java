@@ -7,7 +7,7 @@ import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.SlotCatalogDetails;
 
 /**
- * 
+ * @author kshitij.gupta1
  */
 public interface GymOwnerDAOInterface {
 	public void insertGymDB(Integer gymOwnerID, String gymName, String gymAddress);

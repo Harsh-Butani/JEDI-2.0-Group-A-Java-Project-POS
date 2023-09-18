@@ -18,27 +18,27 @@ public class GymOwnerServiceOperation implements GymOwnerServiceInterface{
 		dao  = new GymOwnerDAOImplementation();
 	}
 	@Override
-	public boolean registerGym(GymDetails gym) {
+	public boolean registerGym(GymDetails gym) { // Used to request registration for the passed gym
 		// TODO Auto-generated method stub
 		dao.insertGymDB(gym.getGymOwnerID(), gym.getGymName(), gym.getGymAddress());
 		return true;
 	}
 
 	@Override
-	public boolean viewMyGyms(Integer gymOwnerID) {
+	public boolean viewMyGyms(Integer gymOwnerID) { // Used to view gyms of the passed gym owner
 		// TODO Auto-generated method stub
 		return dao.queryGymDB(gymOwnerID);
 	}
 	
-	public Integer fetchGymID(Integer gymOwnerID, String gymName, String gymAddress) {
+	public Integer fetchGymID(Integer gymOwnerID, String gymName, String gymAddress) { // Used to fetch gym ID from the passed parameters
 		return dao.queryGymDB(gymOwnerID, gymName, gymAddress);
 	}
 	
-	public void addSlots(SlotCatalogDetails slot) {
+	public void addSlots(SlotCatalogDetails slot) { // Used to add slot in the Slot DB
 		dao.insertSlotDB(slot);
 	}
 	
-	public Integer getGymOwnerID(String email) {
+	public Integer getGymOwnerID(String email) { // Used to retrieve gym owner ID from his/her email
 		return dao.getIDFromGymOwnerDB(email);
 	}
 }

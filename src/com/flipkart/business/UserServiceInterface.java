@@ -8,7 +8,7 @@ import com.flipkart.bean.User;
 import com.flipkart.exception.AlreadyRegisteredException;
 
 /**
- * 
+ * @author kshitij.gupta1
  */
 public interface UserServiceInterface {
 	public void registerUser(User user) throws AlreadyRegisteredException;

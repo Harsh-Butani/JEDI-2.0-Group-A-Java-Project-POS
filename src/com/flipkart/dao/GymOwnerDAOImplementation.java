@@ -13,7 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 /**
- * 
+ * @author kshitij.gupta1
  */
 public class GymOwnerDAOImplementation implements GymOwnerDAOInterface{
 

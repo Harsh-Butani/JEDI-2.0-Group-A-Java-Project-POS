@@ -14,7 +14,7 @@ public class VerificationServiceOperation implements VerificationServiceInterfac
 		userDAO = new UserDAOImplementation();
 	}
 	@Override
-	public boolean verifyCredentials(User user) throws UserNotRegisteredException {
+	public boolean verifyCredentials(User user) throws UserNotRegisteredException { // Used to verify credentials
 		if(!userDAO.queryUserDB(user)) {
 			throw new UserNotRegisteredException(user.getEmailID(), user.getRole());
 		}
