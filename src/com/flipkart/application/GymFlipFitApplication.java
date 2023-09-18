@@ -4,11 +4,17 @@ package com.flipkart.application;
  * @author kshitij.gupta1
  */
 import java.util.Scanner;
+//import java.time.*;
+import java.util.Date;
 
 import com.flipkart.bean.GymOwner;
 import com.flipkart.business.VerificationServiceOperation;
 import com.flipkart.exception.AlreadyRegisteredException;
+import com.flipkart.exception.InvalidAadharException;
 import com.flipkart.exception.UserNotRegisteredException;
+import com.flipkart.exception.WrongEmailFormatException;
+import com.flipkart.validator.GymOwnerValidation;
+import com.flipkart.validator.UserValidation;
 import com.flipkart.bean.User;
 import com.flipkart.business.VerificationServiceInterface;
 import com.flipkart.business.UserServiceInterface;
@@ -44,7 +50,11 @@ public class GymFlipFitApplication {
         			
         			try {
 	        			if(verifier.verifyCredentials(userLogin)) {
-	        				System.out.println("Successfully logged in");
+	        				Date currentDate = new Date();
+//	        				LocalDate localDate = LocalDate.now();
+//	        				LocalTime localTime = LocalTime.now();
+//	        				LocalDateTime localDateTime = LocalDateTime.now();
+	        				System.out.println("Successfully logged in at " + currentDate);
 	        				if(userLogin.getRole().equals("Customer")) {
 	            				GymFlipFitCustomerMenu.customerMenu(in);
 	            			}
@@ -67,6 +77,15 @@ public class GymFlipFitApplication {
         			User user  = new User();
         			System.out.println("Enter email ID");
 					String emailID = in.next();
+					try {
+						if(!UserValidation.checkEmail(emailID)) {
+							continue;
+						}
+					}
+					catch(WrongEmailFormatException e) {
+						System.out.println("The email " + e.getEmail() + " doesn't match the correct format. Please retry");
+						continue;
+					}
         			//user.setEmailID(in.next());
         			System.out.println("Create a password");
 					String password = in.next();
@@ -85,7 +104,15 @@ public class GymFlipFitApplication {
 							gymOwner.setAddress(in.next());
 							System.out.println("Enter your IDProof(Aadhar number)");
 							gymOwner.setIDProof(in.nextInt());
-
+							try {
+								if(!GymOwnerValidation.checkAadhar(gymOwner.getIDProof())) {
+									continue;
+								}
+							}
+							catch(InvalidAadharException e) {
+								System.out.println("Please enter a valid Aadhar Number of 12 digits");
+								continue;
+							}
 							userService.registerGymOwner(gymOwner);
 							break;
 						case "Customer":
