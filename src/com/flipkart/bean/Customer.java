@@ -1,7 +1,12 @@
 package com.flipkart.bean;
-
+/**
+ * @author kshitij.gupta1
+ */
 public class Customer {
 	private String customerID;
+	private String customerName;
+	private String customerAddress;
+	
 	public String getCustomerID() {
 		return customerID;
 	}
@@ -20,6 +25,4 @@ public class Customer {
 	public void setCustomerAddress(String customerAddress) {
 		this.customerAddress = customerAddress;
 	}
-	private String customerName;
-	private String customerAddress;
 }
